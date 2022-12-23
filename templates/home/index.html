@@ -1,0 +1,201 @@
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Venus - {% block title %}Home{% endblock %}</title>#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
+{##}
+{#    {% block style %}{% endblock %}#}
+{#    <link rel="stylesheet" href="{% static 'home/css/font.css' %}">#}
+{#    <link rel="stylesheet" href="{% static 'home/css/menu.css' %}">#}
+{#    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">#}
+{#    <link rel="stylesheet" href="{% static 'home/css/pattern.css' %}">#}
+{##}
+{##}
+{#</head>#}
+{#<body onload="draw()">#}
+{##}
+{#<div class="main">#}
+{##}
+{#    <div class="home_menu" id="home_menu">#}
+{# <a href="/">Home</a>#}
+{##}
+{#        <a href="{% url 'blog' %}">Blog</a>#}
+{##}
+{#        <a href="{% url 'rules' %}">Rules</a>#}
+{##}
+{#        <a href="{% url 'about' %}">About</a>#}
+{##}
+{#        <a href="{% url 'contact' %}">Contact</a>#}
+{##}
+{#        <a href="{% url 'dashboard' %}">Dashboard</a>#}
+{##}
+{#</div>#}
+{##}
+{#    <div class="title" id="title">#}
+{#        <p style="font-size: 50px">Venous</p>#}
+{#        <p style="font-size: 25px">Cloud Security Service</p>#}
+{#    </div>#}
+{##}
+{#    <div style="text-align: left;padding-top: 8%;padding-left: 2%">#}
+{#        <div class='hide' id='wrap' style="top: 10%" onclick="draw()">#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#        <div class='cell two'></div>#}
+{#    </div>#}
+{#    </div>#}
+{##}
+{#    <script src="{% static 'home/js/menu.js' %}"></script>#}
+{#    <script src="{% static 'home/js/home.js' %}"></script>#}
+{#    <script src="{% static 'home/js/pattern.js' %}"></script>#}
+{#    <script src="{% static 'home/js/jquery.js' %}"></script>#}
+{##}
+{#    {% block script %}{% endblock %}#}
+{##}
+{#</div>#}
+{#</body>#}
+{#</html>#}
+
+
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="row home_row">
+
+
+            <div class="jumbotron">
+                <h1 class="display-1 home_header"><b>Welcome to Venous</b></h1>
+                <p class="lead">Everything you need for security is here</p>
+
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Get Start</a>
+                </p>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,223 @@
+{% extends 'home/../dashboard/base.html' %}
+{% load static %}
+{% block extend_header %}
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+{% endblock %}
+{% block title %}Details{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-10">
+                <div class="row align-items-center gy-3 text-center mb-4">
+                    <div class="col-sm-6 text-sm-start">
+                        <h1 class="h4 mb-0"> {{ url }} #{{ order_id }}</h1>
+                    </div>
+                    <div class="col-sm-6 text-sm-end">
+                        <button class="btn btn-primary mb-2 mb-sm-0" id="create_pdf" type="button">
+                            Download
+                        </button>
+                    </div>
+                </div>
+                <div class="card" id="content">
+                    <link rel="stylesheet"
+                          href="{% static '/home/../../static/dashboard/vendor/choices.js/public/assets/styles/choices.min.css' %}">
+                    <!-- Google fonts - Muli-->
+                    <link rel="stylesheet" href="{% static '/home/../../static/dashboard/fonts/css.css' %}">
+                    <!-- theme stylesheet-->
+                    <link rel="stylesheet" href="{% static '/home/../../static/dashboard/css/style.default.premium.688adad1.css' %}"
+                          id="theme-stylesheet">
+                    <!-- Custom stylesheet - for your changes-->
+                    <link rel="stylesheet" href="{% static '/home/../../static/dashboard/css/custom.0a822280.css' %}">
+                    <!-- Favicon-->
+                    <link rel="shortcut icon" href="{% static '/home/../../static/dashboard/img/favicon.3903ee9d.ico' %}">
+                    <div class="card-body p-sm-5">
+                        <div class="row">
+                            <div class="col text-end">
+                                <!-- Badge-->
+                                <div class="badge bg-danger">{{ created_on }}</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <!-- Logo--><img class="img-fluid mb-4"
+                                                 src="{% static 'home/../../static/dashboard/img/brand/brand-1.ea0b9074.svg' %}"
+                                                 alt="..."
+                                                 style="max-width: 6rem;">
+                                <!-- Heading-->
+                                <h2 class="mb-2 text-gray-400">Result of {{ url }}</h2>
+                                <p class="text-muted mb-6">Order ID #{{ order_id }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <h6 class="text-uppercase text-muted">Risk Type</h6>
+                                <p class="text-muted mb-4 text-sm">
+                                    Information<br>
+                                    Low<br>
+                                    Medium<br>
+                                    High<br>
+                                    Critical<br>
+                                </p>
+                                <h6 class="text-uppercase text-muted">Total</h6>
+                            </div>
+                            <div class="col-12 col-md-6 text-md-end">
+                                <h6 class="text-uppercase text-muted">Count</h6>
+                                <p class="text-muted mb-4 text-sm">
+                                    {{ count_information }}<br>
+                                    {{ count_low }}<br>
+                                    {{ count_medium }}<br>
+                                    {{ count_high }}<br>
+                                    {{ count_critical }}<br>
+                                </p>
+                                <h6 class="text-uppercase text-muted">{{ count_total }}</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- Table-->
+                                <div class="table-responsive">
+                                    <table class="table mt-4 mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th class="px-0 bg-transparent border-top-0"><span class="h6">Name</span>
+                                            </th>
+                                            <th class="px-0 bg-transparent border-top-0"><span
+                                                    class="h6">Description</span></th>
+                                            <th class="px-0 bg-transparent border-top-0"><span class="h6">Risk</span>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for item in total %}
+                                            <tr>
+                                                <td class="px-0">{{ item.name }}</td>
+                                                <td class="px-0">{{ item.error }}</td>
+                                                <td class="px-0 text-end">{{ item.risk }}</td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        <tr>
+                                            <td class="px-0 border-bottom-0"><strong>Total Risk :</strong></td>
+                                            <td class="px-0 text-end border-bottom-0" colspan="2"><span
+                                                    class="h3 mb-0"> {{ total_risk }}</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="border-bottom border-gray-200 my-5"></div>
+                                <h6 class="text-uppercase">Note</h6>
+                                <p class="text-muted mb-0 text-sm">One morning, when Gregor Samsa woke from troubled
+                                    dreams, he found himself transformed in his bed into a horrible vermin. He lay on
+                                    his armour-like back, and if he lifted his head a little he could see his brown
+                                    belly, slightly domed and divided by arches into stiff sections</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block extend_footer %}
+        <script>
+            (function () {
+                var
+                    form = $('#content'),
+                    cache_width = form.width(),
+                    a4 = [595.28, 841.89]; // for a4 size paper width and height
+
+                $('#create_pdf').on('click', function () {
+                    $('body').scrollTop(0);
+                    createPDF();
+                });
+
+                //create pdf
+                function createPDF() {
+                    getCanvas().then(function (canvas) {
+                        var
+                            img = canvas.toDataURL("image/png"),
+                            doc = new jsPDF({
+                                unit: 'px',
+                                format: 'a4'
+                            });
+                        doc.addImage(img, 'JPEG', 20, 20);
+                        doc.save('{{ name }}.pdf');
+                        form.width(cache_width);
+                    });
+                }
+
+                // create canvas object
+                function getCanvas() {
+                    form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+                    return html2canvas(form, {
+                        imageTimeout: 2000,
+                        removeContainer: true
+                    });
+                }
+
+            }());
+        </script>
+        <script>
+            (function ($) {
+                $.fn.html2canvas = function (options) {
+                    var date = new Date(),
+                        $message = null,
+                        timeoutTimer = false,
+                        timer = date.getTime();
+                    html2canvas.logging = options && options.logging;
+                    html2canvas.Preload(this[0], $.extend({
+                        complete: function (images) {
+                            var queue = html2canvas.Parse(this[0], images, options),
+                                $canvas = $(html2canvas.Renderer(queue, options)),
+                                finishTime = new Date();
+
+                            $canvas.css({position: 'absolute', left: 0, top: 0}).appendTo(document.body);
+                            $canvas.siblings().toggle();
+
+                            $(window).click(function () {
+                                if (!$canvas.is(':visible')) {
+                                    $canvas.toggle().siblings().toggle();
+                                    throwMessage("Canvas Render visible");
+                                } else {
+                                    $canvas.siblings().toggle();
+                                    $canvas.toggle();
+                                    throwMessage("Canvas Render hidden");
+                                }
+                            });
+                            throwMessage('Screenshot created in ' + ((finishTime.getTime() - timer) / 1000) + " seconds<br />", 4000);
+                        }
+                    }, options));
+
+                    function throwMessage(msg, duration) {
+                        window.clearTimeout(timeoutTimer);
+                        timeoutTimer = window.setTimeout(function () {
+                            $message.fadeOut(function () {
+                                $message.remove();
+                            });
+                        }, duration || 2000);
+                        if ($message)
+                            $message.remove();
+                        $message = $('<div ></div>').html(msg).css({
+                            margin: 0,
+                            padding: 10,
+                            background: "#000",
+                            opacity: 0.7,
+                            position: "fixed",
+                            top: 10,
+                            right: 10,
+                            fontFamily: 'Tahoma',
+                            color: '#fff',
+                            fontSize: 12,
+                            borderRadius: 12,
+                            width: 'auto',
+                            height: 'auto',
+                            textAlign: 'center',
+                            textDecoration: 'none'
+                        }).hide().fadeIn().appendTo('body');
+                    }
+                };
+            })(jQuery);
+        </script>
+    {% endblock %}
+{% endblock %}

@@ -86,12 +86,12 @@
 
         // If we have errors, open that tab first
         if (errors.length) {
-            $('.panel-collapse', $collapsible).collapse('hide');
-            errors.eq(0).closest('.panel-collapse').collapse('show');
+            $('.dashboard-collapse', $collapsible).collapse('hide');
+            errors.eq(0).closest('.dashboard-collapse').collapse('show');
 
         } else if (hash) {
             // If we have a tab hash, open that
-            $('.panel-collapse', $collapsible).collapse('hide');
+            $('.dashboard-collapse', $collapsible).collapse('hide');
             $(hash, $collapsible).collapse('show');
         }
 

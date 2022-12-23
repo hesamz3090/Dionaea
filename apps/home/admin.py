@@ -12,3 +12,10 @@ class DocumentAdmin(admin.ModelAdmin):
         if getattr(obj, 'author', None) is None:
             obj.author = request.user
         obj.save()
+
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'first_name', 'last_name', 'email', 'phone', 'type', 'subject', 'created_on')
+    list_filter = ('type', 'subject', 'created_on')
+    search_fields = ('id', 'title', 'first_name', 'last_name', 'email', 'phone', 'type', 'subject', 'created_on')

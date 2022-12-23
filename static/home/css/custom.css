@@ -1,0 +1,139 @@
+:root {
+    --orang: #F68338;
+    --gray: #222222;
+}
+
+body {
+    background-color: var(--gray);
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                     supported by Chrome, Edge, Opera and Firefox */
+}
+
+/* Start Menu */
+.navbar-dark, .bg-dark {
+    background-color: var(--gray) !important;
+}
+
+.menu_ul {
+    --bs-scroll-height: 100px;
+}
+
+.card, .btn, .form-control {
+    border-radius: 0;
+}
+
+.btn-outline-primary {
+    background-color: transparent;
+    border-color: var(--orang);
+    color: var(--orang);
+}
+
+.btn-outline-primary a {
+    color: var(--orang);
+    border-color: var(--orang);
+    text-decoration: none;
+}
+
+
+.btn-outline-primary:hover {
+    background-color: var(--orang);
+    border-color: var(--orang);
+    color: var(--gray);
+}
+
+.btn-outline-primary:active {
+    background-color: var(--orang);
+    border-color: var(--orang);
+    color: var(--gray);
+}
+
+
+.custom-nav {
+    color: var(--orang) !important;
+}
+
+.custom-nav:hover {
+    color: var(--gray) !important;
+    background-color: var(--orang);
+    cursor: pointer;
+}
+
+.navbar-brand {
+
+}
+
+/* End Menu */
+
+/* Start Input */
+.form-control, .form-select {
+    border: none;
+    border-bottom: 2px solid var(--orang);
+}
+
+/* End Input */
+
+/* Start Accordion */
+.accordion-button:not(.collapsed) {
+    color: var(--orang) !important;
+    border-color: red !important;
+}
+
+/* End Accordion */
+
+/* Header Start */
+.header_div {
+    margin-top: 2%;
+    color: #F68338;
+}
+
+.h_descriptions {
+    color: white;
+}
+
+/* Header End */
+
+/* Contact Button Start */
+.btn-primary {
+    border-color: var(--orang);
+    background-color: var(--orang);
+}
+
+.btn-primary:hover {
+    border-color: var(--orang);
+    background-color: var(--orang);
+}
+
+.btn-primary:active {
+    border-color: var(--orang);
+    background-color: var(--orang);
+}
+
+/* Contact Button End */
+
+/* Contact Form */
+#message {
+    height: 100px;
+    width: 100%;
+}
+
+/* End Contact Form */
+
+
+/* Home */
+.home_header {
+    color: var(--orang);
+    padding-top: 15%
+}
+
+.home_row {
+    text-align: center;
+    color: white;
+}
+
+/* End Home */

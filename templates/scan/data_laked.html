@@ -1,0 +1,79 @@
+{% extends 'home/../dashboard/base.html' %}
+{% load static %}
+{% block title %}Data Laked{% endblock %}
+{% block content %}
+
+    <section class="pt-0">
+        <div class="container-fluid">
+            <div class="row gy-4">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="h4 mb-0">Search Form</h3>
+                        </div>
+                        <div class="card-body pt-0">
+                            <form class="form-horizontal">
+                                <div class="row">
+                                   <label class="col-sm-3 form-label" for="{{ form.word.id_for_label }}">{{ form.word.label }}</label>
+                                    <div class="col-sm-9">
+                                        {{ form.word }}
+                                        <small class="form-text">{{ form.word.help_text }}</small>
+                                    </div>
+
+                                </div>
+                                <div class="my-4"></div>
+
+
+                                <div class="my-4"></div>
+                                <div class="row">
+                                    <div class="col-sm-9 ms-auto">
+                                        <button class="btn btn-secondary" type="reset">Cancel</button>
+                                        <button class="btn btn-primary" type="submit">Save changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="card mb-0">
+                        <div class="card-header">
+                            <h3 class="h4 mb-0">Search Report</h3>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="table-responsive">
+                                <table class="table mb-0 table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Phone</th>
+                                        <th>Username</th>
+                                        <th>Peer</th>
+                                        <th>Created On</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in orders %}
+                                        <tr>
+                                            <th scope="row">{{ item.id }}</th>
+                                            <td>{{ item.phone }}</td>
+                                            <td>{{ item.username }}</td>
+                                            <td>{{ item.peer }}</td>
+                                            <td>{{ item.created_on }}</td>
+                                            <td>
+                                                <a target="_blank" href="{% url 'scan_website_report'  item.id %}">Show</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}

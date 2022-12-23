@@ -1,0 +1,87 @@
+{% extends 'home/../dashboard/base.html' %}
+{% load static %}
+{% block title %}Website{% endblock %}
+{% block content %}
+
+    <section class="pt-0">
+        <div class="container-fluid">
+            <div class="row gy-4">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="h4 mb-0">Add Scan</h3>
+                        </div>
+                        <div class="card-body pt-0">
+                            <form class="form-horizontal" method="post" action="{% url 'scan_website' %}">{% csrf_token %}
+                                <div class="row">
+                                   <label class="col-sm-3 form-label" for="{{ form.address.id_for_label }}">{{ form.address.label }}</label>
+                                    <div class="col-sm-9">
+                                        {{ form.address }}
+                                    </div>
+                                </div>
+                                <div class="my-4"></div>
+
+                                <div class="my-4"></div>
+                                <div class="row">
+                                    <label class="col-sm-3 form-label" for="{{ form.plan.id_for_label }}">{{ form.plan.label }}</label>
+                                    <div class="col-sm-9">
+                                        {{ form.plan }}
+                                    </div>
+                                </div>
+
+                                <div class="my-4"></div>
+                                <div class="row">
+                                    <div class="col-sm-9 ms-auto">
+                                        <button class="btn btn-secondary" type="reset">Cancel</button>
+                                        <button class="btn btn-primary" type="submit">Save changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="card mb-0">
+                        <div class="card-header">
+                            <h3 class="h4 mb-0">Scan Report</h3>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="table-responsive">
+                                <table class="table mb-0 table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Address</th>
+                                        <th>Created on</th>
+                                        <th>Status</th>
+                                        <th>Percent</th>
+                                        <th>Plan</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in orders %}
+                                        <tr>
+                                            <th scope="row">{{ item.id }}</th>
+                                            <td>{{ item.address }}</td>
+                                            <td>{{ item.created_on }}</td>
+                                            <td>{{ item.status }}</td>
+                                            <td>{{ item.percent }}</td>
+                                            <td>{{ item.plan }}</td>
+                                            <td>
+                                                <a target="_blank" href="{% url 'scan_website_report'  item.id %}">Show</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% load static %}
+<!-- Sidebar Navigation-->
+<nav id="sidebar">
+    <!-- Sidebar Header-->
+    <div class="sidebar-header d-flex align-items-center p-4">
+        <a class="d-inline-block" href="pages-profile.html"><img class="avatar shadow-0 img-fluid rounded-circle"
+                                                                 src="https://d19m59y37dris4.cloudfront.net/dark-admin-premium/2-0/img/avatar-6.2821b67d.jpg"
+                                                                 alt="..."></a>
+        <div class="ms-3 title">
+            {% if user.first_name != '' and  last_name != '' %}
+                <h1 class="h5">{{ user.first_name }} {{ user.last_name }} </h1>
+                <p>{{ user.username }}</p>
+            {% else %}
+                <h1 class="h5">{{ user.username }} </h1>
+                <p>{{ user.email }}</p>
+            {% endif %}
+
+        </div>
+    </div>
+    <span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
+    <ul class="list-unstyled">
+
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="{% url 'dashboard' %}">
+                <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                    <use xlink:href="#real-estate-1"></use>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="#ScanDropdown" data-bs-toggle="collapse">
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                <use xlink:href="#stack-1"></use>
+            </svg>
+            <span>Scan </span></a>
+            <ul class="collapse list-unstyled " id="ScanDropdown">
+                <li>
+                    <a class="sidebar-link" href="{% url 'scan_website' %}">
+                        Website
+                    </a>
+                </li>
+{#                <li>#}
+{#                    <a class="sidebar-link" href="{% url 'scan_data_laked' %}">#}
+{#                        Data Laked#}
+{#                    </a>#}
+{#                </li>#}
+            </ul>
+        </li>
+    </ul>
+</nav>
