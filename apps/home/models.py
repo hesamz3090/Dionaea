@@ -37,7 +37,7 @@ class Contact(models.Model):
     email = models.CharField(max_length=200, blank=True, null=True)
     phone = models.CharField(max_length=200, blank=True, null=True)
     type = models.CharField(choices=type_list, max_length=200)
-    subject = models.CharField(choices=subject_list, max_length=200)
+    subject = models.CharField(choices=subject_list, max_length=9)
     message = models.TextField()
     answer = models.TextField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
