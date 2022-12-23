@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from scan.models import *
+from apps.scan.models import *
 
 
 def index(request):

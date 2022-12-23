@@ -1,12 +1,10 @@
-from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
-from dashboard.models import *
-import re
+from apps.dashboard.models import *
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.http import HttpResponse
-from urllib.parse import urlsplit
-from scan.models import *
+from apps.scan.models import *
 
 
 def index(request):
