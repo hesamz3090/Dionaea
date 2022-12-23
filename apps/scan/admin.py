@@ -9,6 +9,19 @@ class Tool(admin.ModelAdmin):
     search_fields = ('name',)
 
 
+@admin.register(Vulnerability)
+class Vulnerability(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+
+
+@admin.register(Command)
+class Command(admin.ModelAdmin):
+    list_display = ('id', 'description', 'tool', 'risk', 'speed', 'vulnerability')
+    list_filter = ('tool', 'risk', 'speed', 'vulnerability')
+    search_fields = ('description', 'text', 'alert')
+
+
 @admin.register(Scan)
 class Scan(admin.ModelAdmin):
     list_display = ('id', 'user', 'address', 'created_on', 'percent', 'filter')
@@ -27,14 +40,3 @@ class Task(admin.ModelAdmin):
     list_display = ('id', 'user', 'scan', 'text', 'found')
     list_filter = ('found', 'user')
     search_fields = ('scan', 'user', 'id')
-
-
-@admin.register(Vulnerability)
-class Vulnerability(admin.ModelAdmin):
-    list_display = ('id', 'name')
-    search_fields = ('name',)
-
-
-@admin.register(Command)
-class Command(admin.ModelAdmin):
-    pass
