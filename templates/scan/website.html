@@ -1,87 +1,171 @@
-{% extends 'home/../dashboard/base.html' %}
+{% extends 'dashboard/base.html' %}
 {% load static %}
 {% block title %}Website{% endblock %}
 {% block content %}
 
-    <section class="pt-0">
-        <div class="container-fluid">
-            <div class="row gy-4">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="h4 mb-0">Add Scan</h3>
+    <div class="wrapper">
+        <div class="page-wrapper">
+            <div class="container-xl">
+                <!-- Page title -->
+                <div class="page-header d-print-none">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <!-- Page pre-title -->
+                            <div class="page-pretitle">
+                                Scan
+                            </div>
+                            <h2 class="page-title">
+                                Website
+                            </h2>
                         </div>
-                        <div class="card-body pt-0">
-                            <form class="form-horizontal" method="post" action="{% url 'scan_website' %}">{% csrf_token %}
-                                <div class="row">
-                                   <label class="col-sm-3 form-label" for="{{ form.address.id_for_label }}">{{ form.address.label }}</label>
-                                    <div class="col-sm-9">
-                                        {{ form.address }}
-                                    </div>
-                                </div>
-                                <div class="my-4"></div>
+                        <!-- Page title actions -->
+                        <div class="col-auto ms-auto d-print-none">
+                            <div class="btn-list">
 
-                                <div class="my-4"></div>
-                                <div class="row">
-                                    <label class="col-sm-3 form-label" for="{{ form.plan.id_for_label }}">{{ form.plan.label }}</label>
-                                    <div class="col-sm-9">
-                                        {{ form.plan }}
-                                    </div>
-                                </div>
-
-                                <div class="my-4"></div>
-                                <div class="row">
-                                    <div class="col-sm-9 ms-auto">
-                                        <button class="btn btn-secondary" type="reset">Cancel</button>
-                                        <button class="btn btn-primary" type="submit">Save changes</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-12">
-                    <div class="card mb-0">
-                        <div class="card-header">
-                            <h3 class="h4 mb-0">Scan Report</h3>
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="table-responsive">
-                                <table class="table mb-0 table-striped table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Address</th>
-                                        <th>Created on</th>
-                                        <th>Status</th>
-                                        <th>Percent</th>
-                                        <th>Plan</th>
-                                        <th>Description</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for item in orders %}
-                                        <tr>
-                                            <th scope="row">{{ item.id }}</th>
-                                            <td>{{ item.address }}</td>
-                                            <td>{{ item.created_on }}</td>
-                                            <td>{{ item.status }}</td>
-                                            <td>{{ item.percent }}</td>
-                                            <td>{{ item.plan }}</td>
-                                            <td>
-                                                <a target="_blank" href="{% url 'scan_website_report'  item.id %}">Show</a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
+                                <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                                   data-bs-target="#modal-report">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                         stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                    Create New Scan
+                                </a>
+                                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
+                                   data-bs-target="#modal-report" aria-label="Create new report">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                         stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </section>
+            <div class="page-body">
+                <div class="container-xl">
+                    <div class="row row-cards">
+
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="table-responsive">
+                                    <table class="table table-vcenter table-mobile-md card-table">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Address</th>
+                                            <th>Description</th>
+                                            <th>Created</th>
+                                            <th>Percent</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            {% for scan in website_list %}
+                                                <tr>
+                                            <td data-label="ID" class="text-muted">{{ scan.id }}</td>
+                                            <td data-label="Address">{{ scan.address }}</td>
+                                            <td data-label="Description">{{ scan.description }}</td>
+                                            <td data-label="Created">{{ scan.created_on }}</td>
+                                            <td data-label="Percent">{{ scan.percent }} %</td>
+                                            <td data-label="Status">{{ scan.status.capitalize }}</td>
+
+                                            <td>
+                                                <div class="btn-list flex-nowrap">
+                                                    {% if scan.status == 'new' %}
+                                                        <a href="#" class="btn">
+                                                            Start
+                                                        </a>
+                                                    {% elif scan.status == 'working' %}
+                                                        <a href="#" class="btn">
+                                                            Stop
+                                                        </a>
+                                                    {% elif scan.status == 'completed' %}
+                                                        <a href="#" class="btn">
+                                                            Report
+                                                        </a>
+                                                    {% endif %}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                            {% endfor %}
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">New Scan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label" for="{{ website_form.address.id_for_label }}">
+                                        {{ website_form.address.label }}
+                                    </label>
+                                    {{ website_form.address }}
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="{{ website_form.description.id_for_label }}">
+                                        {{ website_form.description.label }}
+                                    </label>
+                                    {{ website_form.description }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Create
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
 {% endblock %}

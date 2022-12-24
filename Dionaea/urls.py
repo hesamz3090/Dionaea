@@ -25,10 +25,10 @@ handler400 = 'apps.home.views.bad_request'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('scanner/', include('apps.scan.urls')),
-    path('dashboard/', include('apps.dashboard.urls')),
     path('', include('apps.home.urls')),
-] + static(
-    settings.STATIC_URL, document_root=settings.STATIC_ROOT) +\
-    static(settings.MEDIA_ROOT, document_root=settings.MEDIA_ROOT
-)
+    path('dashboard/', include('apps.dashboard.urls')),
+    path('scan/', include('apps.scan.urls')),
+
+] \
+  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
+  + static(settings.MEDIA_ROOT, document_root=settings.MEDIA_ROOT)

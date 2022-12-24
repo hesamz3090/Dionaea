@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-import re
-from urllib.parse import urlsplit
+# from .lib import create_address
 
 risk_list = (
     ("Information", "Information"),
@@ -49,40 +48,33 @@ class Command(models.Model):
     alert = models.TextField(max_length=100)
     speed = models.CharField(choices=time_list, max_length=6)
     word = models.CharField(max_length=100)
+    is_available = models.BooleanField(default=True)
 
     def __str__(self):
         return self.text
 
 
-class Scan(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class Website(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     address = models.CharField(max_length=100)
-    description = models.TextField(max_length=500)
+    description = models.TextField(max_length=500, blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     percent = models.IntegerField(default=0)
-    filter = models.CharField(max_length=50)
-    status = models.CharField(choices=status_list, max_length=9)
-
-    def url_maker(url):
-        if not re.match(r'http(s?)\:', url):
-            url = 'http://' + url
-        parsed = urlsplit(url)
-        host = parsed.netloc
-        if host.startswith('www.'):
-            host = host[4:]
-        return host
+    filter = models.CharField(max_length=50, blank=True, null=True)
+    status = models.CharField(choices=status_list, max_length=9, default='new')
 
     def __str__(self):
         return f'{self.user} , {self.address}'
 
-    def save(self, *args, **kwargs):
-        self.address = self.url_maker(self.address)
-        super(Scan, self).save(*args, **kwargs)
+    def save_model(self, request, obj):
+        # self.address = create_address(self.address)
+        self.user = request.user
+        obj.save()
 
 
 class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    scan = models.ForeignKey(Scan, on_delete=models.CASCADE)
+    scan = models.ForeignKey(Website, on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
     found = models.BooleanField(default=False)
     result = models.TextField(blank=True)

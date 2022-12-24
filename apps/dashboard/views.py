@@ -12,21 +12,15 @@ from apps.scan.models import *
 @login_required(login_url='login')
 def index(request):
     if request.user.is_authenticated:
-        current_user = request.user
-        orders = Scan.objects.filter(user_id=current_user)
-        profile = Profile.objects.get(user=current_user)
-        complete = Scan.objects.filter(percent='100', user_id=current_user)
-
-        found_count = 0
-
-        for item in orders:
-            found_count += item.found.all().count()
-
+        profile = Profile.objects.get(user=request.user)
+        website_list = Website.objects.filter(user=profile.user)
+        website_list_complete = website_list.filter(status='completed')
+        website_list_working = website_list.filter(status='working')
         response = render(request, 'dashboard/index.html', {
-            'order_count': orders.count(),
-            'found_count': found_count,
-            'complete_count': complete.count(),
-            'credit': profile.credit,
+            'website_list_all_count': website_list.count(),
+            'website_list_complete_count': website_list_complete.count(),
+            'website_list_working_count': website_list_working.count(),
+            'profile': profile,
         })
     else:
         response = render(request, 'dashboard/login.html', {})
