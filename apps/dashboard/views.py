@@ -138,7 +138,11 @@ def profile(request):
 def logout(request):
     if request.user.is_authenticated:
         auth_logout(request)
-        response = render(request, 'dashboard/login.html', {})
+        context = {}
+        context['form'] = LoginForm()
+        response = render(request, 'dashboard/login.html', context)
     else:
-        response = render(request, 'dashboard/login.html', {})
+        context = {}
+        context['form'] = LoginForm()
+        response = render(request, 'dashboard/login.html', context)
     return response

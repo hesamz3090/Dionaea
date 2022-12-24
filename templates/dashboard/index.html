@@ -1,83 +1,617 @@
-{% extends 'dashboard/base.html' %}
+{#{% extends '{% static 'dashboard/base.html' %}#}
 {% load static %}
-{% block title %}Panel{% endblock %}
-{% block content %}
-    <section>
-    <div class="container-fluid">
-        <div class="row gy-4">
-            <div class="col-md-3 col-sm-6">
-                <div class="card mb-0">
-                    <div class="card-body">
-                        <div class="d-flex align-items-end justify-content-between mb-2">
-                            <div class="me-2">
-                                <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">
-                  <use xlink:href="#user-1"> </use>
-                </svg>
-                                <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">New Clients</p>
-                            </div>
-                            <p class="text-xxl lh-1 mb-0 text-dash-color-1">27</p>
-                        </div>
-                        <div class="progress" style="height: 3px">
-                            <div class="progress-bar bg-dash-color-1" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+{#{% block title %}Panel{% endblock %}#}
+{#{% block content %}#}
+{#    <section>#}
+{#    <div class="container-fluid">#}
+{#        <div class="row gy-4">#}
+{#            <div class="col-md-3 col-sm-6">#}
+{#                <div class="card mb-0">#}
+{#                    <div class="card-body">#}
+{#                        <div class="d-flex align-items-end justify-content-between mb-2">#}
+{#                            <div class="me-2">#}
+{#                                <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">#}
+{#                  <use xlink:href="#user-1"> </use>#}
+{#                </svg>#}
+{#                                <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">New Clients</p>#}
+{#                            </div>#}
+{#                            <p class="text-xxl lh-1 mb-0 text-dash-color-1">27</p>#}
+{#                        </div>#}
+{#                        <div class="progress" style="height: 3px">#}
+{#                            <div class="progress-bar bg-dash-color-1" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-md-3 col-sm-6">#}
+{#                <div class="card mb-0">#}
+{#                    <div class="card-body">#}
+{#                        <div class="d-flex align-items-end justify-content-between mb-2">#}
+{#                            <div class="me-2">#}
+{#                                <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">#}
+{#                  <use xlink:href="#stack-1"> </use>#}
+{#                </svg>#}
+{#                                <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">New Projects</p>#}
+{#                            </div>#}
+{#                            <p class="text-xxl lh-1 mb-0 text-dash-color-2">375</p>#}
+{#                        </div>#}
+{#                        <div class="progress" style="height: 3px">#}
+{#                            <div class="progress-bar bg-dash-color-2" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-md-3 col-sm-6">#}
+{#                <div class="card mb-0">#}
+{#                    <div class="card-body">#}
+{#                        <div class="d-flex align-items-end justify-content-between mb-2">#}
+{#                            <div class="me-2">#}
+{#                                <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">#}
+{#                  <use xlink:href="#survey-1"> </use>#}
+{#                </svg>#}
+{#                                <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">New Invoices</p>#}
+{#                            </div>#}
+{#                            <p class="text-xxl lh-1 mb-0 text-dash-color-3">140</p>#}
+{#                        </div>#}
+{#                        <div class="progress" style="height: 3px">#}
+{#                            <div class="progress-bar bg-dash-color-3" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-md-3 col-sm-6">#}
+{#                <div class="card mb-0">#}
+{#                    <div class="card-body">#}
+{#                        <div class="d-flex align-items-end justify-content-between mb-2">#}
+{#                            <div class="me-2">#}
+{#                                <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">#}
+{#                  <use xlink:href="#paper-stack-1"> </use>#}
+{#                </svg>#}
+{#                                <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">All Projects</p>#}
+{#                            </div>#}
+{#                            <p class="text-xxl lh-1 mb-0 text-dash-color-4">41</p>#}
+{#                        </div>#}
+{#                        <div class="progress" style="height: 3px">#}
+{#                            <div class="progress-bar bg-dash-color-4" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
+{#{% endblock %}#}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dark Admin by Bootstrapious.com</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <!-- Choices.js' %}-->
+    <link rel="stylesheet" href="{% static 'dashboard/vendor/choices.js/public/assets/styles/choices.min.css' %}">
+    <!-- Quill CSS - I use Quill in one of the examples-->
+    <link rel="stylesheet" href="{% static 'dashboard/vendor/quill/quill.core.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/vendor/quill/quill.snow.css' %}">
+    <!-- Google fonts - Muli-->
+    <link rel="stylesheet" href="{% static 'dashboard/fonts/css.css' %}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.default.premium.688adad1.css' %}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{% static 'dashboard/css/custom.0a822280.css' %}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static 'dashboard/img/favicon.3903ee9d.ico' %}">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg py-3 bg-dash-dark-2 border-bottom border-dash-dark-1 z-index-10">
+            <div class="search-panel">
+                <div class="search-inner d-flex align-items-center justify-content-center">
+                    <div class="close-btn d-flex align-items-center position-absolute top-0 end-0 me-4 mt-2 cursor-pointer"><span>Close </span>
+                        <svg class="svg-icon svg-icon-md svg-icon-heavy text-gray-700 mt-1">
+                    <use xlink:href="#close-1"> </use>
+                  </svg>
+                    </div>
+                    <div class="row w-100">
+                        <div class="col-lg-8 mx-auto">
+                            <form class="px-4" id="searchForm" action="#">
+                                <div class="input-group position-relative flex-column flex-lg-row flex-nowrap">
+                                    <input class="form-control shadow-0 bg-none px-0 w-100" type="search" name="search" placeholder="What are you searching for...">
+                                    <button class="btn btn-link text-gray-600 px-0 text-decoration-none fw-bold cursor-pointer text-center" type="submit">Search</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="card mb-0">
-                    <div class="card-body">
-                        <div class="d-flex align-items-end justify-content-between mb-2">
-                            <div class="me-2">
-                                <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">
-                  <use xlink:href="#stack-1"> </use>
-                </svg>
-                                <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">New Projects</p>
+            <div class="container-fluid d-flex align-items-center justify-content-between py-1">
+                <div class="navbar-header d-flex align-items-center">
+                    <a class="navbar-brand text-uppercase text-reset" href="index.html">
+                        <div class="brand-text brand-big"><strong class="text-primary">Dark</strong><strong>Admin</strong></div>
+                        <div class="brand-text brand-sm"><strong class="text-primary">D</strong><strong>A</strong></div>
+                    </a>
+                    <button class="sidebar-toggle">
+                  <svg class="svg-icon svg-icon-sm svg-icon-heavy transform-none">
+                    <use xlink:href="#arrow-left-1"> </use>
+                  </svg>
+            </button>
+                </div>
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item"><a class="search-open nav-link px-0" href="#">
+                    <svg class="svg-icon svg-icon-xs svg-icon-heavy text-gray-700">
+                      <use xlink:href="#find-1"> </use>
+                    </svg></a></li>
+                    <!-- Messages dropdown -->
+                    <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0" id="navbarDropdownMenuLink1" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <svg class="svg-icon svg-icon-xs svg-icon-heavy">
+                      <use xlink:href="#envelope-1"> </use>
+                    </svg><span class="badge bg-dash-color-1">5</span></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink1">
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="position-relative"><img class="avatar avatar-md" src="{% static 'dashboard/img/avatar-3.d23ced61.jpg' %}" alt="Nadia Halsey">
+                                        <div class="availability-status bg-success"></div>
+                                    </div>
+                                    <div class="ms-3"> <strong class="d-block">Nadia Halsey</strong><span class="d-block text-xs">lorem ipsum dolor sit amit</span><small class="d-block">9:30am</small></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="position-relative"><img class="avatar avatar-md" src="{% static 'dashboard/img/avatar-2.9eed705d.jpg' %}" alt="Peter Ramsy">
+                                        <div class="availability-status bg-warning"></div>
+                                    </div>
+                                    <div class="ms-3"> <strong class="d-block">Nadia Halsey</strong><span class="d-block text-xs">lorem ipsum dolor sit amit</span><small class="d-block">9:30am</small></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="position-relative"><img class="avatar avatar-md" src="{% static 'dashboard/img/avatar-1.ce912d90.jpg' %}" alt="Sam Kaheil">
+                                        <div class="availability-status bg-danger"></div>
+                                    </div>
+                                    <div class="ms-3"> <strong class="d-block">Nadia Halsey</strong><span class="d-block text-xs">lorem ipsum dolor sit amit</span><small class="d-block">9:30am</small></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="position-relative"><img class="avatar avatar-md" src="{% static 'dashboard/img/avatar-5.f8d832d9.jpg' %}" alt="Sara Wood">
+                                        <div class="availability-status bg-secondary"></div>
+                                    </div>
+                                    <div class="ms-3"> <strong class="d-block">Nadia Halsey</strong><span class="d-block text-xs">lorem ipsum dolor sit amit</span><small class="d-block">9:30am</small></div>
+                                </a>
+                            </li>
+                            <li><a class="dropdown-item text-center message" href="#"> <strong>See All Messages <i class="fas fa-angle-right ms-1"></i></strong></a></li>
+                        </ul>
+                    </li>
+                    <!-- Tasks dropdown                   -->
+                    <li class="list-inline-item dropdown px-lg-2"><a class="nav-link text-reset px-1 px-lg-0" id="navbarDropdownMenuLink2" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <svg class="svg-icon svg-icon-xs svg-icon-heavy">
+                      <use xlink:href="#paper-stack-1"> </use>
+                    </svg><span class="badge bg-dash-color-3">9</span></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink2">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <div class="d-flex justify-content-between mb-1"><strong>Task 1</strong><span>40% complete</span></div>
+                                    <div class="progress" style="height: 2px">
+                                        <div class="progress-bar bg-dash-color-1" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <div class="d-flex justify-content-between mb-1"><strong>Task 2</strong><span>20% complete</span></div>
+                                    <div class="progress" style="height: 2px">
+                                        <div class="progress-bar bg-dash-color-2" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <div class="d-flex justify-content-between mb-1"><strong>Task 3</strong><span>70% complete</span></div>
+                                    <div class="progress" style="height: 2px">
+                                        <div class="progress-bar bg-dash-color-3" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <div class="d-flex justify-content-between mb-1"><strong>Task 4</strong><span>40% complete</span></div>
+                                    <div class="progress" style="height: 2px">
+                                        <div class="progress-bar bg-dash-color-4" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <div class="d-flex justify-content-between mb-1"><strong>Task 5</strong><span>30% complete</span></div>
+                                    <div class="progress" style="height: 2px">
+                                        <div class="progress-bar bg-dash-color-1" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li> <a class="dropdown-item text-center" href="#"> <strong>See All Tasks <i class="fas fa-angle-right ms-1"></i></strong></a></li>
+                        </ul>
+                    </li>
+                    <!-- Mega menu-->
+                    <li class="list-inline-item dropdown menu-large px-lg-2"><a class="nav-link text-sm text-reset px-1 px-lg-0" href="#" data-bs-toggle="dropdown">Mega <i class="fas fa-ellipsis-v ms-1"></i></a>
+                        <ul class="dropdown-menu megamenu dropdown-menu-dark p-4">
+                            <div class="row gy-3 mb-4">
+                                <div class="col-lg-3">
+                                    <h6 class="mb-2 text-uppercase">Elements Heading</h6>
+                                    <ul class="list-unstyled text-gray-700">
+                                        <li class="py-1"><a class="inherit-link" href="#">Lorem ipsum dolor</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Sed ut perspiciatis</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Voluptatum deleniti</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">At vero eos</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Consectetur adipiscing</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Duis aute irure</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Necessitatibus saepe</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Maiores alias</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-3">
+                                    <h6 class="mb-2 text-uppercase">Elements Heading</h6>
+                                    <ul class="list-unstyled text-gray-700">
+                                        <li class="py-1"><a class="inherit-link" href="#">Lorem ipsum dolor</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Sed ut perspiciatis</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Voluptatum deleniti</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">At vero eos</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Consectetur adipiscing</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Duis aute irure</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Necessitatibus saepe</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Maiores alias</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-3">
+                                    <h6 class="mb-2 text-uppercase">Elements Heading</h6>
+                                    <ul class="list-unstyled text-gray-700">
+                                        <li class="py-1"><a class="inherit-link" href="#">Lorem ipsum dolor</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Sed ut perspiciatis</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Voluptatum deleniti</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">At vero eos</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Consectetur adipiscing</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Duis aute irure</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Necessitatibus saepe</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Maiores alias</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-3">
+                                    <h6 class="mb-2 text-uppercase">Elements Heading</h6>
+                                    <ul class="list-unstyled text-gray-700">
+                                        <li class="py-1"><a class="inherit-link" href="#">Lorem ipsum dolor</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Sed ut perspiciatis</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Voluptatum deleniti</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">At vero eos</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Consectetur adipiscing</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Duis aute irure</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Necessitatibus saepe</a></li>
+                                        <li class="py-1"><a class="inherit-link" href="#">Maiores alias</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <p class="text-xxl lh-1 mb-0 text-dash-color-2">375</p>
+                            <div class="row text-center gy-3">
+                                <div class="col-lg-2 col-md-4"><a class="d-block p-4 text-white bg-dash-color-1" href="#">
+                          <svg class="svg-icon svg-icon-sm sv-icon-heavy text-white">
+                            <use xlink:href="#time-1"> </use>
+                          </svg>
+                      <p class="text-sm d mb-0">Demo 1</p></a></div>
+                                <div class="col-lg-2 col-md-4"><a class="d-block p-4 text-white bg-dash-color-2" href="#">
+                          <svg class="svg-icon svg-icon-sm sv-icon-heavy text-white">
+                            <use xlink:href="#time-1"> </use>
+                          </svg>
+                      <p class="text-sm d mb-0">Demo 2</p></a></div>
+                                <div class="col-lg-2 col-md-4"><a class="d-block p-4 text-white bg-dash-color-3" href="#">
+                          <svg class="svg-icon svg-icon-sm sv-icon-heavy text-white">
+                            <use xlink:href="#time-1"> </use>
+                          </svg>
+                      <p class="text-sm d mb-0">Demo 3</p></a></div>
+                                <div class="col-lg-2 col-md-4"><a class="d-block p-4 text-white bg-dash-color-4" href="#">
+                          <svg class="svg-icon svg-icon-sm sv-icon-heavy text-white">
+                            <use xlink:href="#time-1"> </use>
+                          </svg>
+                      <p class="text-sm d mb-0">Demo 4</p></a></div>
+                                <div class="col-lg-2 col-md-4"><a class="d-block p-4 text-white bg-danger" href="#">
+                          <svg class="svg-icon svg-icon-sm sv-icon-heavy text-white">
+                            <use xlink:href="#time-1"> </use>
+                          </svg>
+                      <p class="text-sm d mb-0">Demo 5</p></a></div>
+                                <div class="col-lg-2 col-md-4"><a class="d-block p-4 text-white bg-info" href="#">
+                          <svg class="svg-icon svg-icon-sm sv-icon-heavy text-white">
+                            <use xlink:href="#time-1"> </use>
+                          </svg>
+                      <p class="text-sm d mb-0">Demo 6</p></a></div>
+                            </div>
+                        </ul>
+                    </li>
+                    <!-- Languages dropdown    -->
+                    <li class="list-inline-item dropdown"><a class="nav-link dropdown-toggle text-sm text-reset px-1 px-lg-0" id="languages" rel="nofollow" data-bs-target="#" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{% static 'dashboard/img/flags/16/GB.3b8a0264.png' %}" alt="English"><span class="d-none d-sm-inline-block ms-2">English</span></a>
+                        <ul class="dropdown-menu dropdown-menu-end mt-sm-3 dropdown-menu-dark" aria-labelledby="languages">
+                            <li><a class="dropdown-item" rel="nofollow" href="#"> <img class="me-2" src="{% static 'dashboard/img/flags/16/DE.c8295af1.png' %}" alt="English"><span>German</span></a></li>
+                            <li><a class="dropdown-item" rel="nofollow" href="#"> <img class="me-2" src="{% static 'dashboard/img/flags/16/FR.b848c9d2.png' %}" alt="English"><span>French                   </span></a></li>
+                        </ul>
+                    </li>
+                    <li class="list-inline-item logout px-lg-2"> <a class="nav-link text-sm text-reset px-1 px-lg-0" id="logout" href="login.html"> <span class="d-none d-sm-inline-block">Logout </span>
+                    <svg class="svg-icon svg-icon-xs svg-icon-heavy">
+                      <use xlink:href="#disable-1"> </use>
+                    </svg></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="d-flex align-items-stretch">
+        <!-- Sidebar Navigation-->
+        <nav id="sidebar">
+            <!-- Sidebar Header-->
+            <div class="sidebar-header d-flex align-items-center p-4"><a class="d-inline-block" href="pages-profile.html"><img class="avatar shadow-0 img-fluid rounded-circle" src="{% static 'dashboard/img/avatar-6.2821b67d.jpg' %}" alt="..."></a>
+                <div class="ms-3 title">
+                    <h1 class="h5 mb-1">Mark Stephen</h1>
+                    <p class="text-sm text-gray-700 mb-0 lh-1">Web Designer</p>
+                </div>
+            </div><span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
+            <ul class="list-unstyled">
+                <li class="sidebar-item"><a class="sidebar-link" href="index.html">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#real-estate-1"> </use>
+                      </svg><span>Home </span></a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#tablesDropdown" data-bs-toggle="collapse">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#portfolio-grid-1"> </use>
+                      </svg><span>Tables </span></a>
+                    <ul class="collapse list-unstyled " id="tablesDropdown">
+                        <li><a class="sidebar-link" href="tables.html">Bootstrap tables</a></li>
+                        <li><a class="sidebar-link" href="tables-datatable.html">Datatable</a></li>
+                    </ul>
+                </li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#chartsDropdown" data-bs-toggle="collapse">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#sales-up-1"> </use>
+                      </svg><span>Charts </span></a>
+                    <ul class="collapse list-unstyled " id="chartsDropdown">
+                        <li><a class="sidebar-link" href="charts.html">Charts</a></li>
+                        <li><a class="sidebar-link" href="charts-gauge-sparkline.html">Gauge + Sparkline</a></li>
+                    </ul>
+                </li>
+                <li class="sidebar-item active"><a class="sidebar-link" href="#formsDropdown" aria-expanded data-bs-toggle="collapse">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#survey-1"> </use>
+                      </svg><span>Forms </span></a>
+                    <ul class="collapse list-unstyled show" id="formsDropdown">
+                        <li><a class="sidebar-link" href="forms.html">Basics forms</a></li>
+                        <li><a class="sidebar-link" href="forms-advanced.html">Advanced forms</a></li>
+                        <li><a class="sidebar-link" href="forms-autocomplete.html">Autocomplete</a></li>
+                        <li><a class="sidebar-link" href="forms-dropzone.html">Files upload</a></li>
+                        <li><a class="sidebar-link" href="forms-texteditor.html">Text editor</a></li>
+                        <li class="active"><a class="sidebar-link" href="forms-validation.html">Validation</a></li>
+                    </ul>
+                </li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#componentsDropdown" data-bs-toggle="collapse">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#stack-1"> </use>
+                      </svg><span>Components </span></a>
+                    <ul class="collapse list-unstyled " id="componentsDropdown">
+                        <li><a class="sidebar-link" href="components-cards.html">Cards</a></li>
+                        <li><a class="sidebar-link" href="components-calendar.html">Calendar</a></li>
+                        <li><a class="sidebar-link" href="components-gallery.html">Gallery</a></li>
+                        <li><a class="sidebar-link" href="components-loading-buttons.html">Loading buttons</a></li>
+                        <li><a class="sidebar-link" href="components-map.html">Maps</a></li>
+                        <li><a class="sidebar-link" href="components-notifications.html">Notifications</a></li>
+                        <li><a class="sidebar-link" href="components-preloader.html">Preloaders</a></li>
+                    </ul>
+                </li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#pagesDropdown" data-bs-toggle="collapse">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#multiple-windows-1"> </use>
+                      </svg><span>Pages </span></a>
+                    <ul class="collapse list-unstyled " id="pagesDropdown">
+                        <li><a class="sidebar-link" href="pages-contacts.html">Contacts</a></li>
+                        <li><a class="sidebar-link" href="pages-invoice.html">Invoice</a></li>
+                        <li><a class="sidebar-link" href="login.html">Login page</a></li>
+                        <li><a class="sidebar-link" href="login-2.html">Login v.2 <span class="badge bg-info ms-1 small">New</span></a></li>
+                        <li><a class="sidebar-link" href="pages-profile.html">Profile</a></li>
+                        <li><a class="sidebar-link" href="pages-pricing.html">Pricing table</a></li>
+                    </ul>
+                </li>
+            </ul><span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Extras</span>
+            <ul class="list-unstyled">
+                <li class="sidebar-item"><a class="sidebar-link" href="#">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#imac-screen-1"> </use>
+                      </svg><span>Demo </span></a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#chart-1"> </use>
+                      </svg><span>Demo </span></a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#quality-1"> </use>
+                      </svg><span>Demo </span></a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                        <use xlink:href="#security-shield-1"> </use>
+                      </svg><span>Demo </span></a></li>
+            </ul>
+        </nav>
+        <div class="page-content form-page">
+            <!-- Page Header-->
+            <div class="bg-dash-dark-2 py-4">
+                <div class="container-fluid">
+                    <h2 class="h5 mb-0">Forms validation</h2>
+                </div>
+            </div>
+            <!-- Breadcrumb-->
+            <div class="container-fluid py-2">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 py-3 px-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Forms validation</li>
+                    </ol>
+                </nav>
+            </div>
+            <section class="pt-0">
+                <div class="container-fluid">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h4 class="mb-0">Validation with Just-Validate</h4>
                         </div>
-                        <div class="progress" style="height: 3px">
-                            <div class="progress-bar bg-dash-color-2" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="card-body pt-0">
+                            <p>
+                                This template comes with a custom integration of Just Validate plugin. See more about it at&nbsp;<a href="https://github.com/horprogs/Just-validate" target="_blank">https://github.com/horprogs/Just-validate</a>.</p>
+                            <p>This plugin is a lightweight (~4,5kb gzip) form validation in Javascript Vanilla, without dependencies, with customizable rules (including remote validation), customizable messages and customizable submit form with ajax helper.
+                                </p>
+                        </div>
+                    </div>
+                    <div class="row gy-4">
+                        <div class="col-lg-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h4 class="mb-0">Validation example - A simple login form</h4>
+                                </div>
+                                <div class="card-body pt-0">
+                                    <form id="simpleLoginForm" action="#">
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input class="form-control" name="email" type="email" placeholder="Email Address" required data-validate-field="email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Password</label>
+                                            <input class="form-control" name="password" type="password" placeholder="Password" required data-validate-field="password">
+                                        </div>
+                                        <input class="btn btn-primary" type="submit" value="Sign in">
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-0">Validation example - A simple sign up form</h4>
+                                </div>
+                                <div class="card-body pt-0">
+                                    <p class="text-muted">In this form, I check the following:</p>
+                                    <ul class="text-muted text-sm">
+                                        <li>Name: filled</li>
+                                        <li>Email: filled + valid</li>
+                                        <li>Password: filled, minimal length 5 characters</li>
+                                        <li>Password confirmation: filled and equals to the password </li>
+                                    </ul>
+                                    <form id="form2" action="#">
+                                        <div class="mb-3">
+                                            <label class="form-label">Name</label>
+                                            <input class="form-control" name="name" type="text" placeholder="Your name" required data-validate-field="name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input class="form-control" name="email" type="email" placeholder="Email Address" required data-validate-field="email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Password</label>
+                                            <input class="form-control" id="password" name="password" type="password" placeholder="Password" required data-validate-field="password">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Confirm password</label>
+                                            <input class="form-control" id="passwordConfirmation" name="passwordConfirmation" type="password" placeholder="Password" required data-validate-field="passwordConfirmation">
+                                        </div>
+                                        <input class="btn btn-primary" type="submit" value="Sign in">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-0">Validation example - A form with the quill editor</h4>
+                                </div>
+                                <div class="card-body pt-0">
+                                    <form id="editorForm" action="#">
+                                        <div class="mb-3">
+                                            <label class="form-label">Name</label>
+                                            <input class="form-control" name="editorName" type="text" required data-validate-field="editorName">
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="editor">
+                                                <textarea class="form-control" id="editor" rows="10" name="editorContent" required data-validate-field="editorContent"></textarea>
+                                            </div>
+                                        </div>
+                                        <input class="btn btn-primary" type="submit" value="Submit">
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="card mb-0">
-                    <div class="card-body">
-                        <div class="d-flex align-items-end justify-content-between mb-2">
-                            <div class="me-2">
-                                <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">
-                  <use xlink:href="#survey-1"> </use>
-                </svg>
-                                <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">New Invoices</p>
-                            </div>
-                            <p class="text-xxl lh-1 mb-0 text-dash-color-3">140</p>
-                        </div>
-                        <div class="progress" style="height: 3px">
-                            <div class="progress-bar bg-dash-color-3" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+                <!-- Page Footer-->
+                <footer class="position-absolute bottom-0 bg-dash-dark-2 text-white text-center py-3 w-100 text-xs" id="footer">
+                    <div class="container-fluid text-center">
+                        <p class="mb-0 text-dash-gray">2021 &copy; Your company. Design by <a href="https://bootstrapious.com">Bootstrapious</a>.</p>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="card mb-0">
-                    <div class="card-body">
-                        <div class="d-flex align-items-end justify-content-between mb-2">
-                            <div class="me-2">
-                                <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">
-                  <use xlink:href="#paper-stack-1"> </use>
-                </svg>
-                                <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">All Projects</p>
-                            </div>
-                            <p class="text-xxl lh-1 mb-0 text-dash-color-4">41</p>
-                        </div>
-                        <div class="progress" style="height: 3px">
-                            <div class="progress-bar bg-dash-color-4" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </footer>
+            </section>
         </div>
     </div>
-</section>
-{% endblock %}
+    <button class="btn btn-primary btn-sm d-none d-md-inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#style-switch" id="style-switch-button"><i class="fas fa-cog fa-2x"></i></button>
+    <div class="collapse" id="style-switch">
+        <h5 class="mb-3">Select theme colour</h5>
+        <form class="mb-3">
+            <select class="form-select" name="colour" id="colour">
+          <option value="">select colour variant</option>
+          <option value="{% static 'dashboard/css/style.default.premium.688adad1.css' %}">pink</option>
+          <option value="{% static 'dashboard/css/style.red.premium.39c2a96a.css' %}">red</option>
+          <option value="{% static 'dashboard/css/style.green.premium.12d2e631.css' %}">green</option>
+          <option value="{% static 'dashboard/css/style.violet.premium.d8196f32.css' %}">violet</option>
+          <option value="{% static 'dashboard/css/style.sea.premium.b0c1974f.css' %}">sea</option>
+          <option value="{% static 'dashboard/css/style.blue.premium.c3f02455.css' %}">blue</option>
+        </select>
+        </form>
+        <p><img class="img-fluid" src="{% static 'dashboard/img/template-mac.e1286699.png' %}" alt=""></p>
+        <p class="text-muted text-xs">Stylesheet switching is done via JavaScript and can cause a blink while page loads. This will not happen in your production code.</p>
+    </div>
+    <!-- JavaScript files-->
+    <script src="{% static 'dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'dashboard/vendor/just-validate/js/just-validate.min.js' %}"></script>
+    <script src="{% static 'dashboard/vendor/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'dashboard/vendor/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+    <script src="{% static 'dashboard/js/js-cookie.0d5f0e08.js' %}">
+    </script>
+    <script src="{% static 'dashboard/js/demo.bbd40f0c.js' %}">
+    </script>
+    <!-- Quill  - I use Quill in one of the examples-->
+    <script src="{% static 'dashboard/vendor/quill/quill.min.js' %}"></script>
+    <!-- Quill init + its validation-->
+    <script src="{% static 'dashboard/js/forms-validation.a111ca30.js' %}">
+    </script>
+    <!-- Main File-->
+    <script src="{% static 'dashboard/js/front.df077648.js' %}"></script>
+    <script>
+        // ------------------------------------------------------- //
+        //   Inject SVG Sprite -
+        //   see more here
+        //   https://css-tricks.com/ajaxing-svg-sprite/
+        // ------------------------------------------------------ //
+        function injectSvgSprite(path) {
+
+            var ajax = new XMLHttpRequest();
+            ajax.open("GET", path, true);
+            ajax.send();
+            ajax.onload = function(e) {
+                var div = document.createElement("div");
+                div.className = 'd-none';
+                div.innerHTML = ajax.responseText;
+                document.body.insertBefore(div, document.body.childNodes[0]);
+            }
+        }
+        // this is set to BootstrapTemple website as you cannot
+        // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
+        // while using file:// protocol
+        // pls don't forget to change to your domain :)
+        injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
+    </script>
+    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+    <link rel="stylesheet" href="{% static 'dashboard/fonts/css/all.css' %}" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</body>
+
+</html>
