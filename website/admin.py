@@ -2,6 +2,32 @@ from django.contrib import admin
 from .models import *
 
 
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+
+    def get_queryset(self, request):
+        qs = super(ProfileAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(user=request.user)
+
+    list_display = ('id', 'user')
+    search_fields = ('id', 'user')
+
+
+@admin.register(Setting)
+class SettingAdmin(admin.ModelAdmin):
+
+    def get_queryset(self, request):
+        qs = super(SettingAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(user=request.user)
+
+    list_display = ('id', 'user')
+    search_fields = ('id', 'user')
+
+
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'descriptions', 'url', 'created_on', 'updated_on', 'author')

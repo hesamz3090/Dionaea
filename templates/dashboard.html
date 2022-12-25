@@ -1,6 +1,6 @@
-{% extends 'dashboard/base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
-{% block title %}Home{% endblock %}
+{% block title %}Dashboard{% endblock %}
 {% block content %}
 
     <div class="wrapper">
@@ -34,22 +34,22 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-                                <span class="bg-blue text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/currency-dollar -->
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                       stroke-linecap="round" stroke-linejoin="round">
-                                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                      <path d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path>
-                                      <path d="M12 3v3m0 12v3"></path>
+                                <span class="bg-blue text-white avatar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <circle cx="12" cy="12" r="9"></circle>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                        <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"></path>
+                                    </svg>
                                   </svg>
                                 </span>
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
-                                                {{ profile.credit }}
+                                                {{ profile.left_day }}
                                             </div>
                                             <div class="text-muted">
-                                                Credit
+                                                Membership Left Day
                                             </div>
                                         </div>
                                     </div>
@@ -62,7 +62,9 @@
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                 <span class="bg-green text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
-                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list"
+                                      width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                      fill="none" stroke-linecap="round" stroke-linejoin="round">
                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                    <line x1="9" y1="6" x2="20" y2="6"></line>
                                    <line x1="9" y1="12" x2="20" y2="12"></line>
@@ -91,7 +93,10 @@
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                 <span class="bg-yellow text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/users -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check"
+                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                         stroke="currentColor" fill="none" stroke-linecap="round"
+                                         stroke-linejoin="round">
                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                        <path d="M5 12l5 5l10 -10"></path>
                                     </svg>
@@ -99,7 +104,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
-                                                {{ website_list_complete_count}}
+                                                {{ website_list_complete_count }}
                                             </div>
                                             <div class="text-muted">
                                                 Website Scan Completed
@@ -115,7 +120,9 @@
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                 <span class="bg-twitter text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-twitter -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alarm" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alarm"
+                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                     fill="none" stroke-linecap="round" stroke-linejoin="round">
                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                    <circle cx="12" cy="13" r="7"></circle>
                                    <polyline points="12 10 12 13 14 13"></polyline>
@@ -134,6 +141,67 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Vulnerability</h3>
+                                </div>
+                                <div class="card" style="height: calc(24rem + 10px)">
+                                    <div class="card-body card-body-scrollable card-body-scrollable-shadow">
+                                        <div class="divide-y">
+
+                                            {% for vulnerability in vulnerability_list %}
+                                                <div>
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                                <p>Name : {{ vulnerability.name }}</p>
+
+                                                                Tips : <p>{{ vulnerability.tips }}</p></p>
+
+                                                                <strong class="text-truncate">Fix : </strong>
+                                                                <p>{{ vulnerability.fix }}</p>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Tools Data</h3>
+                                </div>
+                                <table class="table card-table table-vcenter">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th colspan="2">Command</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for tool in tools_list %}
+                                        <tr>
+                                            <td>{{ tool.0 }}</td>
+                                            <td>{{ tool.1 }}</td>
+                                            <td>{{ tool.2 }}</td>
+                                            <td class="w-50">
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar bg-primary"
+                                                         style="width: {{ tool.3 }}%"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
 

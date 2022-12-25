@@ -1,0 +1,76 @@
+{% load static %}
+
+<header class="navbar navbar-expand-md navbar-light d-print-none">
+    <div class="container-xl">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-2">
+            <a href="{% url 'home' %}" class="h1">
+                Dionaea
+            </a>
+        </h1>
+        <div class="navbar-nav flex-row order-md-last">
+
+
+            <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode"
+               data-bs-toggle="tooltip" data-bs-placement="bottom">
+                <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                     stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+                </svg>
+            </a>
+            <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode"
+               data-bs-toggle="tooltip" data-bs-placement="bottom">
+                <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                     stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+                </svg>
+            </a>
+
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+                   aria-label="Open user menu">
+                        <span class="avatar avatar-sm"
+                              style="background-image: url({% static 'avatars/075m.png' %})"></span>
+                    <div class="d-none d-xl-block ps-2">
+                        {% if user.is_authenticated %}
+                            {% if user.first_name and user.last_name %}
+                                <div>{{ user.first_name }} {{ user.last_name }}</div>
+                            {% else %}
+                                <div>{{ user.email }}</div>
+                            {% endif %}
+                            <div class="mt-1 small text-muted">{{ user.username }}</div>
+                        {% else %}
+                            <div>Account</div>
+                            <div class="mt-1 small text-muted">Need To Login</div>
+                        {% endif %}
+
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'home' %}" class="dropdown-item">Home</a>
+                        <a href="{% url 'profile' %}" class="dropdown-item">Profile</a>
+                        <a href="{% url 'ticket' %}" class="dropdown-item">Ticket</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="dropdown-item">Login</a>
+                        <a href="{% url 'register' %}" class="dropdown-item">Register</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{% url 'forget' %}" class="dropdown-item">Forget Password</a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>

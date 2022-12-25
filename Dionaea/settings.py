@@ -136,8 +136,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.scan.apps.ScanConfig',
-    'apps.dashboard.apps.DashboardConfig',
-    'apps.home.apps.HomeConfig',
+    'website.apps.WebsiteConfig',
 ]
 
 

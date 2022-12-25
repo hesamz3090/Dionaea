@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 type_list = (
     ("ticket", "ticket"),
@@ -14,6 +14,23 @@ subject_list = (
     ("questions", "questions"),
     ("other", "other"),
 )
+
+
+class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    left_day = models.IntegerField(default=0)
+    free_try = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
+
+
+class Setting(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Document(models.Model):

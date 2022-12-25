@@ -1,0 +1,434 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+    <div class="wrapper">
+
+        <div class="page-wrapper">
+
+            <div class="page-body">
+                <div class="container-xl">
+                    <div class="row row-deck row-cards">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                <span class="bg-blue text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/currency-dollar -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon icon-tabler icon-tabler-tool" width="24" height="24"
+                                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                                 stroke-linecap="round" stroke-linejoin="round">
+                                           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                           <path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5"></path>
+                                        </svg>
+                                </span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">
+                                                {{ tools_count }}
+                                            </div>
+                                            <div class="text-muted">
+                                                Tools
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                <span class="bg-green text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-terminal-2"
+                                      width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                      fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                       <path d="M8 9l3 3l-3 3"></path>
+                                       <line x1="13" y1="15" x2="16" y2="15"></line>
+                                       <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                                    </svg>
+                                </span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">
+                                                {{ command_count }}
+                                            </div>
+                                            <div class="text-muted">
+                                                Command
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                <span class="bg-yellow text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/users -->
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bug"
+                                       width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                       fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                       <path d="M9 9v-1a3 3 0 0 1 6 0v1"></path>
+                                       <path d="M8 9h8a6 6 0 0 1 1 3v3a5 5 0 0 1 -10 0v-3a6 6 0 0 1 1 -3"></path>
+                                       <line x1="3" y1="13" x2="7" y2="13"></line>
+                                       <line x1="17" y1="13" x2="21" y2="13"></line>
+                                       <line x1="12" y1="20" x2="12" y2="14"></line>
+                                       <line x1="4" y1="19" x2="7.35" y2="17"></line>
+                                       <line x1="20" y1="19" x2="16.65" y2="17"></line>
+                                       <line x1="4" y1="7" x2="7.75" y2="9.4"></line>
+                                       <line x1="20" y1="7" x2="16.25" y2="9.4"></line>
+                                    </svg>
+                                </span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">
+                                                {{ vulnerability_count }}
+                                            </div>
+                                            <div class="text-muted">
+                                                Vulnerabilities Type
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                <span class="bg-twitter text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-twitter -->
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="icon icon-tabler icon-tabler-browser-check" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                       <rect x="4" y="4" width="16" height="16" rx="1"></rect>
+                                       <path d="M4 8h16"></path>
+                                       <path d="M8 4v4"></path>
+                                       <path d="M9.5 14.5l1.5 1.5l3 -3"></path>
+                                    </svg>
+                                </span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">
+                                                {{ website_count }}
+                                            </div>
+                                            <div class="text-muted">
+                                                Website Scaned
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Fast Web Site Scan</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-group mb-3 row">
+                                            <label class="form-label col-3 col-form-label">Address</label>
+                                            <div class="col">
+                                                {{ fast_scan_form.address }}
+                                                <small class="form-hint">It's Fast And Free So Test It .</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-footer">
+                                            <button type="submit" class="btn btn-primary">Scan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-md">
+                                <div class="card-body text-center">
+                                    <div class="text-uppercase text-muted font-weight-medium">Free</div>
+                                    <div class="display-5 my-3">$0</div>
+                                    <ul class="list-unstyled lh-lg">
+                                        <li><strong>3</strong> Users</li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-success"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M5 12l5 5l10 -10"></path>
+                                            </svg>
+                                            Sharing Tools
+                                        </li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/x -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-danger"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                            </svg>
+                                            Design Tools
+                                        </li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/x -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-danger"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                            </svg>
+                                            Private Messages
+                                        </li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/x -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-danger"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                            </svg>
+                                            Twitter API
+                                        </li>
+                                    </ul>
+                                    <div class="text-center mt-4">
+                                        <a href="#" class="btn w-100">Choose plan</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-md">
+                                <div class="ribbon ribbon-top ribbon-bookmark bg-green">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-filled"
+                                         width="24"
+                                         height="24" viewBox="0 0 24 24" stroke-width="2"
+                                         stroke="currentColor"
+                                         fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+                                    </svg>
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="text-uppercase text-muted font-weight-medium">Premium</div>
+                                    <div class="display-5 my-3">$49</div>
+                                    <ul class="list-unstyled lh-lg">
+                                        <li><strong>10</strong> Users</li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-success"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M5 12l5 5l10 -10"></path>
+                                            </svg>
+                                            Sharing Tools
+                                        </li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-success"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M5 12l5 5l10 -10"></path>
+                                            </svg>
+                                            Design Tools
+                                        </li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/x -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-danger"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                            </svg>
+                                            Private Messages
+                                        </li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/x -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-danger"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                            </svg>
+                                            Twitter API
+                                        </li>
+                                    </ul>
+                                    <div class="text-center mt-4">
+                                        <a href="#" class="btn btn-green w-100">Choose plan</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-md">
+                                <div class="card-body text-center">
+                                    <div class="text-uppercase text-muted font-weight-medium">Enterprise
+                                    </div>
+                                    <div class="display-5 my-3">$99</div>
+                                    <ul class="list-unstyled lh-lg">
+                                        <li><strong>100</strong> Users</li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-success"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M5 12l5 5l10 -10"></path>
+                                            </svg>
+                                            Sharing Tools
+                                        </li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-success"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M5 12l5 5l10 -10"></path>
+                                            </svg>
+                                            Design Tools
+                                        </li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-success"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M5 12l5 5l10 -10"></path>
+                                            </svg>
+                                            Private Messages
+                                        </li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/x -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-danger"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                            </svg>
+                                            Twitter API
+                                        </li>
+                                    </ul>
+                                    <div class="text-center mt-4">
+                                        <a href="#" class="btn w-100">Choose plan</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-md">
+                                <div class="card-body text-center">
+                                    <div class="text-uppercase text-muted font-weight-medium">Unlimited
+                                    </div>
+                                    <div class="display-5 my-3">$139</div>
+                                    <ul class="list-unstyled lh-lg">
+                                        <li><strong>Unlimited</strong> Users</li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-success"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M5 12l5 5l10 -10"></path>
+                                            </svg>
+                                            Sharing Tools
+                                        </li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-success"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M5 12l5 5l10 -10"></path>
+                                            </svg>
+                                            Design Tools
+                                        </li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-success"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M5 12l5 5l10 -10"></path>
+                                            </svg>
+                                            Private Messages
+                                        </li>
+                                        <li>
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon me-1 text-success"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M5 12l5 5l10 -10"></path>
+                                            </svg>
+                                            Twitter API
+                                        </li>
+                                    </ul>
+                                    <div class="text-center mt-4">
+                                        <a href="#" class="btn w-100">Choose plan</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -16,11 +16,12 @@
     {% block extend_head %}{% endblock %}
 </head>
 <body>
-{% include 'dashboard/header.html' %}
+{% include 'base/header.html' %}
+{% include 'base/navbar.html' %}
 
 {% block content %}{% endblock %}
 
-{% include 'dashboard/footer.html' %}
+{% include 'base/footer.html' %}
 <!-- Libs JS -->
 <script src="{% static 'libs/apexcharts/dist/apexcharts.min.js' %}"></script>
 <!-- Tabler Core -->

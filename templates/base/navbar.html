@@ -1,0 +1,220 @@
+<div class="navbar-expand-md">
+    <div class="collapse navbar-collapse" id="navbar-menu">
+        <div class="navbar navbar-light">
+            <div class="container-xl">
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard' %}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dashboard"
+                                 width="24" height="24"
+                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="13" r="2"></circle>
+                               <line x1="13.45" y1="11.55" x2="15.5" y2="9.5"></line>
+                               <path d="M6.4 20a9 9 0 1 1 11.2 0z"></path>
+                            </svg>
+                        </span>
+                                <span class="nav-link-title">
+                          Dashboard
+                        </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#navbar-website" data-bs-toggle="dropdown"
+                               data-bs-auto-close="outside" role="button" aria-expanded="true">
+
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home-2"
+                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                         stroke="currentColor" fill="none" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                       <polyline points="5 12 3 12 12 3 21 12 19 12"></polyline>
+                                       <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path>
+                                       <rect x="10" y="12" width="4" height="4"></rect>
+                                    </svg>
+
+                                </span>
+
+                                <span class="nav-link-title">Website</span>
+
+                            </a>
+
+                            <div class="dropdown-menu" data-bs-popper="none">
+
+                                <a class="dropdown-item" href="{% url 'home' %}">
+                                    Home
+                                </a>
+
+                                <a class="dropdown-item" href="{% url 'contact' %}">
+                                    Contact
+                                </a>
+
+                                <a class="dropdown-item" href="{% url 'about' %}">
+                                    About
+                                </a>
+
+                                <a class="dropdown-item" href="{% url 'privacy' %}">
+                                    Privacy
+                                </a>
+
+                                <a class="dropdown-item" href="{% url 'terms' %}">
+                                    Terms
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#navbar-scan" data-bs-toggle="dropdown"
+                               data-bs-auto-close="outside" role="button" aria-expanded="false">
+
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         class="icon icon-tabler icon-tabler-scan-eye"
+                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                         stroke="currentColor"
+                                         fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M4 8v-2a2 2 0 0 1 2 -2h2"></path>
+                                        <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
+                                        <path d="M16 4h2a2 2 0 0 1 2 2v2"></path>
+                                        <path d="M16 20h2a2 2 0 0 0 2 -2v-2"></path>
+                                        <path d="M7 12c3.333 -4.667 6.667 -4.667 10 0"></path>
+                                        <path d="M7 12c3.333 4.667 6.667 4.667 10 0"></path>
+                                        <path d="M12 12h-.01"></path>
+                                    </svg>
+                                </span>
+
+                                <span class="nav-link-title">Scan</span>
+
+                            </a>
+                            <div class="dropdown-menu">
+
+                                <a class="dropdown-item" href="{% url 'scan_website' %}">
+                                    Website
+                                </a>
+
+                            </div>
+                        </li>
+
+{#                        <li class="nav-item">#}
+{#                            <a class="nav-link" href="{% url 'docs' %}">#}
+{#                        <span class="nav-link-icon d-md-none d-lg-inline-block">#}
+{##}
+{#                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"#}
+{#                                  stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"#}
+{#                                  stroke-linejoin="round">#}
+{#                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>#}
+{#                                 <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>#}
+{#                                 <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>#}
+{#                                 <line x1="9" y1="9" x2="10" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line>#}
+{#                                 <line x1="9" y1="17" x2="15" y2="17"></line>#}
+{#                             </svg>#}
+{#                        </span>#}
+{#                                <span class="nav-link-title">#}
+{#                          Docs#}
+{#                        </span>#}
+{#                            </a>#}
+{#                        </li>#}
+
+
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <polyline points="5 12 3 12 12 3 21 12 19 12"></polyline>
+                               <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path>
+                               <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path>
+                            </svg>
+                        </span>
+                                <span class="nav-link-title">
+                          Home
+                        </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contact' %}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-phone" width="24"
+                              height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                              stroke-linecap="round" stroke-linejoin="round">
+                           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                           <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
+                        </svg>
+                        </span>
+                                <span class="nav-link-title">
+                          Contact
+                        </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circles"
+                               width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                               fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="7" r="4"></circle>
+                               <circle cx="6.5" cy="17" r="4"></circle>
+                               <circle cx="17.5" cy="17" r="4"></circle>
+                            </svg>
+                        </span>
+                                <span class="nav-link-title">
+                          About
+                        </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'privacy' %}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-spy" width="24"
+                                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <path d="M3 11h18"></path>
+                               <path d="M5 11v-4a3 3 0 0 1 3 -3h8a3 3 0 0 1 3 3v4"></path>
+                               <circle cx="7" cy="17" r="3"></circle>
+                               <circle cx="17" cy="17" r="3"></circle>
+                               <path d="M10 17h4"></path>
+                            </svg>
+                        </span>
+                                <span class="nav-link-title">
+                          Privacy
+                        </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'terms' %}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notebook"
+                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
+   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+   <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18"></path>
+   <line x1="13" y1="8" x2="15" y2="8"></line>
+   <line x1="13" y1="12" x2="15" y2="12"></line>
+</svg>                        </span>
+                                <span class="nav-link-title">
+                          Terms
+                        </span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>

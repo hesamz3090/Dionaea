@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from apps.dashboard.models import Profile
+from website.models import Profile
 from .models import Command, Website, Task
 
 

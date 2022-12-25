@@ -36,3 +36,24 @@ class WebsiteForm(forms.Form):
             description=self.cleaned_data.get('description'),
             status='new',
         )
+
+
+class FastWebsiteScanForm(forms.Form):
+    address = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'address',
+                'autocomplete': 'off',
+                'placeholder': 'test.com',
+            }
+        ),
+        max_length=50,
+        label='Address',
+    )
+
+    def save(self):
+        Website.objects.create(
+            address=create_address(self.cleaned_data.get('address')),
+            status='new',
+        )

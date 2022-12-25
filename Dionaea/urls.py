@@ -18,16 +18,16 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-handler404 = 'apps.home.views.page_not_found'
-handler500 = 'apps.home.views.server_error'
-handler403 = 'apps.home.views.permission_denied'
-handler400 = 'apps.home.views.bad_request'
+handler404 = 'website.views.page_not_found'
+handler500 = 'website.views.server_error'
+handler403 = 'website.views.permission_denied'
+handler400 = 'website.views.bad_request'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('apps.home.urls')),
-    path('dashboard/', include('apps.dashboard.urls')),
+    path('', include('website.urls')),
     path('scan/', include('apps.scan.urls')),
+    path('api/', include('apps.api.urls')),
 
 ] \
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
