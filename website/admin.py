@@ -45,3 +45,10 @@ class ContactAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'first_name', 'last_name', 'email', 'phone', 'type', 'subject', 'created_on')
     list_filter = ('type', 'subject', 'created_on')
     search_fields = ('id', 'title', 'first_name', 'last_name', 'email', 'phone', 'type', 'subject', 'created_on')
+
+
+@admin.register(Payment)
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'code', 'user', 'amount', 'descriptions', 'result', 'created_on')
+    list_filter = ('title', 'result', 'created_on')
+    search_fields = ('id', 'code', 'amount', 'descriptions')

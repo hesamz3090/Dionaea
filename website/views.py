@@ -60,7 +60,8 @@ def dashboard(request):
 
 @login_required(login_url='login')
 def ticket(request):
-    response = render(request, 'ticket.html', {})
+    form = ContactForm()
+    response = render(request, 'ticket.html', {'form': form})
     return response
 
 
@@ -110,7 +111,6 @@ def contact(request):
 
 
 def login(request):
-    back_url = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
         form = LoginForm(request.POST)
 
@@ -123,18 +123,17 @@ def login(request):
                 response = HttpResponseRedirect(reverse('dashboard'))
             else:
                 message = 'Username Or Password Is Wrong'
-                response = render(request, 'message.html', {'message': message, 'back_url': back_url})
+                response = render(request, 'login.html', {})
         else:
             message = form.errors
-            response = render(request, 'message.html', {'message': message, 'back_url': back_url})
+            response = render(request, 'login.html', {})
 
     else:
         if request.user.is_authenticated:
             response = HttpResponseRedirect(reverse('dashboard'))
         else:
-            context = {}
-            context['form'] = LoginForm()
-            response = render(request, 'login.html', context)
+            form = LoginForm()
+            response = render(request, 'login.html', {'form': form})
     return response
 
 
@@ -146,17 +145,21 @@ def register(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
+            print(email)
             password = form.cleaned_data.get('password')
             user_exist = User.objects.filter(username=username)
             email_exist = User.objects.filter(email=email)
 
             if not user_exist and not email_exist:
-                user = User.objects.create_user(
+                user = User.objects.create(
                     username=username,
                     email=email,
                     password=password
                 )
 
+                Profile.objects.create_user(
+                    user=user,
+                )
                 auth_login(request, user)
                 response = HttpResponseRedirect(reverse('dashboard'))
 
@@ -209,8 +212,7 @@ def forget(request):
 @login_required(login_url='login')
 def logout(request):
     auth_logout(request)
-    login_form = LoginForm()
-    response = render(request, 'login.html', {'login_form': login_form})
+    response = HttpResponseRedirect(reverse('login'))
     return response
 
 
