@@ -13,11 +13,21 @@ def scan_website(request):
         if form.is_valid():
             address = create_address(form.cleaned_data.get('address'))
             description = form.cleaned_data.get('description')
-            create_website_scan(request.user.username, address, description)
-            response = render(request, 'apps/scan_website.html', {'website_list': query, 'website_form': form})
+            message = create_website_scan(request.user.username, address, description)
+            response = render(request, 'apps/scan_website.html', {
+                'website_list': query,
+                'website_form': form,
+                'message': message,
+                'type': 'MESSAGE',
+            })
         else:
-            response = render(request, 'apps/scan_website.html', {'website_list': query, 'website_form': form})
-
+            message = form.errors
+            response = render(request, 'apps/scan_website.html', {
+                'website_list': query,
+                'website_form': form,
+                'message': message,
+                'type': 'ERORR',
+            })
 
     else:
         response = render(request, 'apps/scan_website.html', {'website_list': query, 'website_form': form})

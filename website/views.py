@@ -10,6 +10,8 @@ from website.forms import LoginForm, RegisterForm, ForgetForm, ContactForm, Tick
 from apps.scan.models import *
 
 
+# back_url = request.META.get('HTTP_REFERER')
+
 def home(request):
     tools_count = Tool.objects.all().count()
     command_count = Command.objects.all().count()
@@ -64,11 +66,24 @@ def ticket(request):
         if form.is_valid():
             form.save(request)
             message = 'Done'
-            response = HttpResponseRedirect(reverse('ticket'))
+
+            tickets = Ticket.objects.filter(user=request.user)
+            response = render(request, 'ticket.html', {
+                'form': form,
+                'tickets': tickets,
+                'message': message,
+                'type': 'MESSAGE'
+            })
 
         else:
             message = form.errors
-            response = HttpResponseRedirect(reverse('ticket'))
+            tickets = Ticket.objects.filter(user=request.user)
+            response = render(request, 'ticket.html', {
+                'form': form,
+                'tickets': tickets,
+                'message': message,
+                'type': 'MESSAGE'
+            })
     else:
         tickets = Ticket.objects.filter(user=request.user)
         response = render(request, 'ticket.html', {'form': form, 'tickets': tickets})
@@ -91,11 +106,19 @@ def profile(request):
         if form.is_valid():
             form.update(request)
             message = 'Done'
-            response = HttpResponseRedirect(reverse('profile'))
+            response = render(request, 'profile.html', {
+                'form': form,
+                'message': message,
+                'type': 'MESSAGE'
+            })
 
         else:
             message = form.errors
-            response = HttpResponseRedirect(reverse('profile'))
+            response = render(request, 'profile.html', {
+                'form': form,
+                'message': message,
+                'type': 'ERORR'
+            })
     else:
         response = render(request, 'profile.html', {'form': form})
     return response
@@ -118,17 +141,24 @@ def about(request):
 
 def contact(request):
     if request.method == 'POST':
-        back_url = request.META.get('HTTP_REFERER')
         form = ContactForm(request.POST)
 
         if form.is_valid():
             form.save()
             message = 'Done'
-            response = HttpResponseRedirect(reverse('contact'))
+            response = render(request, 'contact.html', {
+                'form': form,
+                'message': message,
+                'type': 'MESSAGE'
+            })
 
         else:
             message = form.errors
-            response = HttpResponseRedirect(reverse('contact'))
+            response = render(request, 'contact.html', {
+                'form': form,
+                'message': message,
+                'type': 'ERORR'
+            })
 
     else:
         form = ContactForm(request.POST)
@@ -150,10 +180,18 @@ def login(request):
                 response = HttpResponseRedirect(reverse('dashboard'))
             else:
                 message = 'Username Or Password Is Wrong'
-                response = render(request, 'login.html', {})
+                response = render(request, 'login.html', {
+                    'form': form,
+                    'message': message,
+                    'type': 'ERORR'
+                })
         else:
             message = form.errors
-            response = render(request, 'login.html', {})
+            response = render(request, 'login.html', {
+                'form': form,
+                'message': message,
+                'type': 'ERORR'
+            })
 
     else:
         if request.user.is_authenticated:
@@ -165,7 +203,6 @@ def login(request):
 
 
 def register(request):
-    back_url = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
         form = RegisterForm(request.POST)
 
@@ -180,11 +217,20 @@ def register(request):
 
             else:
                 message = 'User Is Exist'
-                response = HttpResponseRedirect(reverse('register'))
+                response = render(request, 'register.html', {
+                    'form': form,
+                    'message': message,
+                    'type': 'ERORR'
+                })
+
 
         else:
             message = form.errors
-            response = HttpResponseRedirect(reverse('register'))
+            response = render(request, 'register.html', {
+                'form': form,
+                'message': message,
+                'type': 'ERORR'
+            })
     else:
         if request.user.is_authenticated:
             response = HttpResponseRedirect(reverse('dashboard'))
@@ -195,29 +241,39 @@ def register(request):
 
 
 def forget(request):
-    back_url = request.META.get('HTTP_REFERER')
+    form = ForgetForm(request.POST)
     if request.method == 'POST':
-        form = ForgetForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('email')
             user = User.objects.filter(email=email)
 
             if not user:
                 message = 'User Not Found'
-                response = HttpResponseRedirect(reverse('register'))
+                response = render(request, 'forget.html', {
+                    'form': form,
+                    'message': message,
+                    'type': 'ERORR'
+                })
             else:
                 message = 'Done'
-                response = HttpResponseRedirect(reverse('register'))
+                response = render(request, 'forget.html', {
+                    'form': form,
+                    'message': message,
+                    'type': 'MESSAGE'
+                })
 
         else:
             message = form.errors
-            response = HttpResponseRedirect(reverse('register'))
+            response = render(request, 'forget.html', {
+                'form': form,
+                'message': message,
+                'type': 'ERORR'
+            })
     else:
         if request.user.is_authenticated:
             response = HttpResponseRedirect(reverse('dashboard'))
         else:
 
-            form = ForgetForm()
             response = render(request, 'forget.html', {'form': form})
 
     return response

@@ -1,5 +1,5 @@
 from django import forms
-
+from django.contrib.auth.hashers import make_password
 from .models import *
 
 subject_list = (
@@ -164,7 +164,7 @@ class RegisterForm(forms.Form):
     def save(self, request):
         user = User.objects.create(
             username=self.cleaned_data.get('username'),
-            password=self.cleaned_data.get('password')
+            password=make_password(self.cleaned_data.get('password'))
         )
 
         Profile.objects.create(
