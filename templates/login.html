@@ -9,6 +9,7 @@
             <a href="." class="navbar-brand navbar-brand-autodark">
                 <img src="{% static 'logo.svg' %}" height="36" alt=""></a>
         </div>
+        {% include 'base/alert.html' %}
         <form class="card card-md" action="{% url 'login' %}" method="post" autocomplete="off">{% csrf_token %}
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Login to your account</h2>

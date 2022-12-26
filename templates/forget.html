@@ -7,6 +7,7 @@
         <div class="text-center mb-4">
           <a href="." class="navbar-brand navbar-brand-autodark"><img src="{% static 'logo.svg' %}" height="36" alt=""></a>
         </div>
+        {% include 'base/alert.html' %}
         <form class="card card-md" action="{% url 'forget' %}" method="post">
           <div class="card-body">
             <h2 class="card-title text-center mb-4">Forgot password</h2>
