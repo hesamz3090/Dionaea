@@ -2,8 +2,8 @@
 {% load static %}
 {% block title %}Ticket{% endblock %}
 {% block content %}
-    
-        <div class="wrapper">
+
+    <div class="wrapper">
         <div class="page-wrapper">
             <div class="container-xl">
                 <!-- Page title -->
@@ -62,45 +62,28 @@
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Address</th>
-                                            <th>Description</th>
-                                            <th>Created</th>
-                                            <th>Percent</th>
+                                            <th>Title</th>
+                                            <th>Subject</th>
+                                            <th>Message</th>
                                             <th>Status</th>
-                                            <th>Actions</th>
+                                            <th>Answer</th>
+                                            <th>Created</th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
 
-                                            {% for scan in website_list %}
-                                                <tr>
-                                            <td data-label="ID" class="text-muted">{{ scan.id }}</td>
-                                            <td data-label="Address">{{ scan.address }}</td>
-                                            <td data-label="Description">{{ scan.description }}</td>
-                                            <td data-label="Created">{{ scan.created_on }}</td>
-                                            <td data-label="Percent">{{ scan.percent }} %</td>
-                                            <td data-label="Status">{{ scan.status.capitalize }}</td>
-
-                                            <td>
-                                                <div class="btn-list flex-nowrap">
-                                                    {% if scan.status == 'new' %}
-                                                        <a href="#" class="btn">
-                                                            Start
-                                                        </a>
-                                                    {% elif scan.status == 'working' %}
-                                                        <a href="#" class="btn">
-                                                            Stop
-                                                        </a>
-                                                    {% elif scan.status == 'completed' %}
-                                                        <a href="#" class="btn">
-                                                            Report
-                                                        </a>
-                                                    {% endif %}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                            {% endfor %}
+                                        {% for ticket in tickets %}
+                                            <tr>
+                                                <td data-label="ID" class="text-muted">{{ ticket.id }}</td>
+                                                <td data-label="Address">{{ ticket.title }}</td>
+                                                <td data-label="Description">{{ ticket.subject.capitalize }}</td>
+                                                <td data-label="Created">{{ ticket.message }}</td>
+                                                <td data-label="Created">{{ ticket.status }}</td>
+                                                <td data-label="Percent">{{ ticket.answer }}</td>
+                                                <td data-label="Status">{{ ticket.created_on }}</td>
+                                            </tr>
+                                        {% endfor %}
 
                                         </tbody>
 
@@ -116,7 +99,7 @@
         </div>
     </div>
 
-        <form method="post" action="">
+    <form method="post" action="{% url 'ticket' %}">
         {% csrf_token %}
         <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -129,19 +112,16 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label class="form-label" for="{{ website_form.address.id_for_label }}">
-                                        {{ website_form.address.label }}
-                                    </label>
-                                    {{ website_form.address }}
-                                </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label" for="{{ website_form.description.id_for_label }}">
-                                        {{ website_form.description.label }}
-                                    </label>
-                                    {{ website_form.description }}
-                                </div>
+                                {% for item in form %}
+                                    <div class="mb-3">
+                                        <label class="form-label" for="{{ item.id_for_label }}">
+                                            {{ item.label }}
+                                        </label>
+                                        {{ item }}
+                                    </div>
+                                {% endfor %}
+
                             </div>
                         </div>
                     </div>
@@ -152,7 +132,8 @@
                         </a>
                         <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                 viewBox="0 0 24 24"
                                  stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                                  stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

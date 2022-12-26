@@ -186,3 +186,48 @@ class ForgetForm(forms.Form):
         max_length=50,
         label='Email',
     )
+
+
+class TicketForm(forms.Form):
+    title = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'title',
+                'placeholder': 'Enter Message Title'
+            }
+        ),
+        required=False,
+        max_length=50,
+        label='Title'
+    )
+
+    subject = forms.ChoiceField(
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control',
+                'id': 'subject'
+            }
+        ),
+        choices=subject_list,
+        label='Subject'
+    )
+
+    message = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                'class': 'form-control',
+                'id': 'message',
+                'placeholder': 'Leave a comment here'
+            }
+        ),
+        label='Message'
+    )
+
+    def save(self, request):
+        Ticket.objects.create(
+            title=self.cleaned_data.get('title'),
+            user=request.user,
+            subject=self.cleaned_data.get('subject'),
+            message=self.cleaned_data.get('message')
+        )

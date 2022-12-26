@@ -6,7 +6,7 @@ from website.models import *
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect
-from website.forms import LoginForm, RegisterForm, ForgetForm, ContactForm
+from website.forms import LoginForm, RegisterForm, ForgetForm, ContactForm, TicketForm
 from apps.scan.models import *
 
 
@@ -28,40 +28,49 @@ def home(request):
 
 @login_required(login_url='login')
 def dashboard(request):
-    if request.user.is_authenticated:
-        profile = Profile.objects.get(user=request.user)
-        website_list = Website.objects.filter(user=profile.user)
-        website_list_complete = website_list.filter(status='completed')
-        website_list_working = website_list.filter(status='working')
+    profile = Profile.objects.get(user=request.user)
+    website_list = Website.objects.filter(user=profile.user)
+    website_list_complete = website_list.filter(status='completed')
+    website_list_working = website_list.filter(status='working')
 
-        tools = Tool.objects.all()
-        commands = Command.objects.all()
-        vulnerabilities = Vulnerability.objects.all()
+    tools = Tool.objects.all()
+    commands = Command.objects.all()
+    vulnerabilities = Vulnerability.objects.all()
 
-        tools_list = []
+    tools_list = []
 
-        for tool in tools:
-            tool_count = commands.filter(tool=tool).count()
-            tool_percent = int((100 * tool_count) / commands.count())
-            tools_list.append([tool.id, tool.name, tool_count, tool_percent])
+    for tool in tools:
+        tool_count = commands.filter(tool=tool).count()
+        tool_percent = int((100 * tool_count) / commands.count())
+        tools_list.append([tool.id, tool.name, tool_count, tool_percent])
 
-        response = render(request, 'dashboard.html', {
-            'website_list_all_count': website_list.count(),
-            'website_list_complete_count': website_list_complete.count(),
-            'website_list_working_count': website_list_working.count(),
-            'tools_list': tools_list,
-            'vulnerability_list': vulnerabilities,
-            'profile': profile,
-        })
-    else:
-        response = render(request, 'login.html', {})
+    response = render(request, 'dashboard.html', {
+        'website_list_all_count': website_list.count(),
+        'website_list_complete_count': website_list_complete.count(),
+        'website_list_working_count': website_list_working.count(),
+        'tools_list': tools_list,
+        'vulnerability_list': vulnerabilities,
+        'profile': profile,
+    })
     return response
 
 
 @login_required(login_url='login')
 def ticket(request):
-    form = ContactForm()
-    response = render(request, 'ticket.html', {'form': form})
+    form = TicketForm(request.POST)
+
+    if request.method == 'POST':
+
+        if form.is_valid():
+            form.save(request)
+            response = HttpResponseRedirect(reverse('ticket'))
+
+        else:
+            message = form.errors
+            response = HttpResponseRedirect(reverse('ticket'))
+    else:
+        tickets = Ticket.objects.filter(user=request.user)
+        response = render(request, 'ticket.html', {'form': form, 'tickets': tickets})
     return response
 
 
