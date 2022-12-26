@@ -147,25 +147,14 @@ def login(request):
 def register(request):
     back_url = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = RegisterForm(request.POST)
 
         if form.is_valid():
             username = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password')
             user_exist = User.objects.filter(username=username)
-            email_exist = User.objects.filter(email=email)
 
-            if not user_exist and not email_exist:
-                user = User.objects.create(
-                    username=username,
-                    email=email,
-                    password=password
-                )
-
-                Profile.objects.create_user(
-                    user=user,
-                )
+            if not user_exist:
+                user = form.save(request)
                 auth_login(request, user)
                 response = HttpResponseRedirect(reverse('dashboard'))
 

@@ -149,18 +149,6 @@ class RegisterForm(forms.Form):
         label='Username',
     )
 
-    email = forms.EmailField(
-        widget=forms.EmailInput(
-            attrs={
-                'class': 'form-control',
-                'id': 'email',
-                'autocomplete': 'off',
-            }
-        ),
-        max_length=50,
-        label='Email',
-    )
-
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
@@ -172,6 +160,17 @@ class RegisterForm(forms.Form):
         max_length=50,
         label='Password',
     )
+
+    def save(self, request):
+        user = User.objects.create(
+            username=self.cleaned_data.get('username'),
+            password=self.cleaned_data.get('password')
+        )
+
+        Profile.objects.create(
+            user=user,
+        )
+        return user
 
 
 class ForgetForm(forms.Form):
@@ -225,6 +224,90 @@ class TicketForm(forms.Form):
     )
 
     def save(self, request):
+        Ticket.objects.create(
+            title=self.cleaned_data.get('title'),
+            user=request.user,
+            subject=self.cleaned_data.get('subject'),
+            message=self.cleaned_data.get('message')
+        )
+
+
+class ProfileForm(forms.Form):
+    first_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'first_name',
+                'placeholder': 'Enter Your First Name'
+            }
+        ),
+        max_length=50,
+        label='First Name',
+        required=False
+    )
+
+    last_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'last_name',
+                'placeholder': 'Enter Your Last Name'
+            }
+        ),
+        max_length=50,
+        label='Last Name',
+        required=False
+    )
+
+    email = forms.CharField(
+        widget=forms.EmailInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'email',
+                'placeholder': 'name@example.com'
+            }
+        ),
+        required=False
+    )
+
+    phone = forms.CharField(
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'phone',
+                'placeholder': 'Enter Phone Number'
+            }
+        ),
+        required=False,
+        max_length=13,
+        label='phone'
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'password',
+                'data-validate-field': 'loginPassword'
+            }
+        ),
+        max_length=50,
+        label='Password',
+    )
+
+    new_password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'new_password',
+                'data-validate-field': 'loginPassword'
+            }
+        ),
+        max_length=50,
+        label='New Password',
+    )
+
+    def update(self, request):
         Ticket.objects.create(
             title=self.cleaned_data.get('title'),
             user=request.user,
