@@ -56,6 +56,6 @@ class TicketAdmin(admin.ModelAdmin):
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'code', 'user', 'amount', 'descriptions', 'result', 'created_on')
+    list_display = ('id', 'title', 'code', 'user', 'amount', 'description', 'result', 'created_on')
     list_filter = ('title', 'result', 'created_on')
-    search_fields = ('id', 'code', 'amount', 'descriptions')
+    search_fields = ('id', 'code', 'amount', 'description')

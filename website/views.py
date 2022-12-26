@@ -6,7 +6,7 @@ from website.models import *
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect
-from website.forms import LoginForm, RegisterForm, ForgetForm, ContactForm, TicketForm
+from website.forms import LoginForm, RegisterForm, ForgetForm, ContactForm, TicketForm, ProfileForm
 from apps.scan.models import *
 
 
@@ -76,8 +76,28 @@ def ticket(request):
 
 
 @login_required(login_url='login')
+def payment(request):
+    payments = Payment.objects.filter(user=request.user)
+    response = render(request, 'payment.html', {'payments': payments})
+    return response
+
+
+@login_required(login_url='login')
 def profile(request):
-    response = render(request, 'profile.html', {})
+    form = ProfileForm(request.POST)
+
+    if request.method == 'POST':
+
+        if form.is_valid():
+            form.update(request)
+            message = 'Done'
+            response = HttpResponseRedirect(reverse('profile'))
+
+        else:
+            message = form.errors
+            response = HttpResponseRedirect(reverse('profile'))
+    else:
+        response = render(request, 'profile.html', {'form': form})
     return response
 
 

@@ -80,7 +80,7 @@ class Payment(models.Model):
     code = models.IntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     amount = models.FloatField(default=0)
-    descriptions = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
     result = models.CharField(max_length=30, blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
