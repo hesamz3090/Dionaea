@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                   <form method="post" action="{% url 'profile' %}">
+                                   <form method="post" action="{% url 'profile' %}">{% csrf_token %}
                                        {% for item in form %}
                                         <div class="form-group mb-3 ">
                                             {{ item.label }}

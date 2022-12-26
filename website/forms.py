@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth.hashers import make_password
+
+from django.contrib.auth.hashers import make_password, check_password
 from .models import *
 
 subject_list = (
@@ -304,13 +305,36 @@ class ProfileForm(forms.Form):
             }
         ),
         max_length=50,
+        required=False,
         label='New Password',
     )
 
     def update(self, request):
-        Ticket.objects.create(
-            title=self.cleaned_data.get('title'),
-            user=request.user,
-            subject=self.cleaned_data.get('subject'),
-            message=self.cleaned_data.get('message')
-        )
+        email = self.cleaned_data.get('email')
+        first_name = self.cleaned_data.get('first_name')
+        last_name = self.cleaned_data.get('last_name')
+        phone = self.cleaned_data.get('phone')
+        new_password = self.cleaned_data.get('new_password')
+
+        if check_password(self.cleaned_data.get('password'), request.user.password):
+
+            user = User.objects.get(id=request.user.id)
+            profile = User.objects.get(id=request.user.id)
+
+            if email:
+                user.email = email
+
+            if first_name:
+                user.first_name = first_name
+
+            if last_name:
+                user.last_name = last_name
+
+            if phone:
+                user.phone = phone
+
+            if new_password:
+                user.password = make_password(new_password)
+
+            profile.save()
+            user.save()

@@ -19,6 +19,7 @@ status_list = (
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    phone = models.IntegerField(blank=True, null=True)
     left_day = models.IntegerField(default=0)
     free_try = models.BooleanField(default=False)
     user_verified = models.BooleanField(default=False)
