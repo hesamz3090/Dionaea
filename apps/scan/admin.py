@@ -4,7 +4,7 @@ from .models import *
 
 @admin.register(Tool)
 class ToolAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
+    list_display = ('id', 'user', 'name', 'is_available')
     list_filter = ('name',)
     search_fields = ('name',)
 
@@ -17,7 +17,7 @@ class VulnerabilityAdmin(admin.ModelAdmin):
 
 @admin.register(Command)
 class CommandAdmin(admin.ModelAdmin):
-    list_display = ('id', 'description', 'tool', 'risk', 'speed', 'vulnerability')
+    list_display = ('id', 'user', 'description', 'tool', 'risk', 'speed', 'vulnerability', 'is_available')
     list_filter = ('tool', 'risk', 'speed', 'vulnerability')
     search_fields = ('description', 'text', 'alert')
 

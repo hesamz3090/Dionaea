@@ -24,7 +24,9 @@ status_list = (
 
 
 class Tool(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     name = models.CharField(max_length=11)
+    is_available = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -40,6 +42,7 @@ class Vulnerability(models.Model):
 
 
 class Command(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     tool = models.ForeignKey(Tool, on_delete=models.CASCADE)
     description = models.CharField(max_length=100)
     text = models.TextField()
