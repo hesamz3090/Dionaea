@@ -42,7 +42,7 @@ class Vulnerability(models.Model):
 class Command(models.Model):
     tool = models.ForeignKey(Tool, on_delete=models.CASCADE)
     description = models.CharField(max_length=100)
-    text = models.CharField(choices=risk_list, max_length=100)
+    text = models.TextField()
     risk = models.CharField(choices=risk_list, max_length=11)
     vulnerability = models.ForeignKey(Vulnerability, on_delete=models.CASCADE)
     alert = models.TextField(max_length=100)

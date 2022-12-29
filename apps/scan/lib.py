@@ -14,32 +14,25 @@ def create_address(address):
 def create_website_scan(username, address, description):
     commands = Command.objects.filter(is_available=True)
     user = User.objects.get(username=username)
-    profile = Profile.objects.get(user=user)
     address = create_address(address)
 
-    if commands.count() <= profile.credit:
-        profile.credit -= commands.count()
-        profile.save()
+    scan = Website.objects.create(
+        user=user,
+        address=create_address(address),
+        description=description,
+        status='new',
+    )
 
-        scan = Website.objects.create(
+    for command in commands:
+        command_row = Command.objects.get(id=command.id)
+        text = command_row.text.replace("$", address)
+
+        Task.objects.create(
             user=user,
-            address=create_address(address),
-            description=description,
-            status='new',
+            scan=scan,
+            text=text,
         )
 
-        for command in commands:
-            command_row = Command.objects.get(id=command.id)
-            text = command_row.text.replace("$", address)
-
-            Task.objects.create(
-                user=user,
-                scan=scan,
-                text=text,
-            )
-
-        message = 'Scan Added'
-    else:
-        message = 'Low Credit'
+    message = 'Scan Added'
 
     return message
