@@ -7,7 +7,7 @@ from apps.scan.models import *
 tasks = Task.objects.filter(result='').order_by('id')[:50]
 
 for task in tasks:
-    if task.scan.status == 'Closed':
+    if task.scan.status == 'closed':
         task.delete()
     else:
         process = subprocess.Popen(
@@ -28,7 +28,14 @@ for task in tasks:
 
         left_task = Task.objects.filter(scan=task.scan, result='').count()
         total_task = Task.objects.filter(scan=task.scan).count()
-        task.scan.percent = ((100 * left_task) / total_task)
 
+        if left_task == 0:
+            task.scan.percent = 100
+            task.scan.status = 'completed'
+
+        else:
+            task.scan.percent = ((100 * left_task) / total_task)
+
+        task.scan.save()
         task.save()
 

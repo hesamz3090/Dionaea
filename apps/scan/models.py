@@ -19,7 +19,7 @@ time_list = (
 status_list = (
     ("new", "New"),
     ("working", "Working"),
-    ("Closed", "Closed"),
+    ("closed", "Closed"),
     ("completed", "Completed"),
 )
 
