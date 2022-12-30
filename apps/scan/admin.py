@@ -19,7 +19,7 @@ class VulnerabilityAdmin(admin.ModelAdmin):
 class CommandAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'description', 'tool', 'risk', 'speed', 'vulnerability', 'is_available')
     list_filter = ('tool', 'risk', 'speed', 'vulnerability')
-    search_fields = ('description', 'text', 'alert')
+    search_fields = ('description', 'arg', 'alert')
 
 
 @admin.register(Website)

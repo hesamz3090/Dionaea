@@ -26,6 +26,7 @@ status_list = (
 class Tool(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     name = models.CharField(max_length=11)
+    text = models.TextField(default=name)
     is_available = models.BooleanField(default=True)
 
     def __str__(self):
@@ -45,7 +46,7 @@ class Command(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     tool = models.ForeignKey(Tool, on_delete=models.CASCADE)
     description = models.CharField(max_length=100)
-    text = models.TextField()
+    arg = models.TextField()
     risk = models.CharField(choices=risk_list, max_length=11)
     vulnerability = models.ForeignKey(Vulnerability, on_delete=models.CASCADE)
     alert = models.TextField(max_length=100)
@@ -54,7 +55,7 @@ class Command(models.Model):
     is_available = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.text
+        return self.arg
 
 
 class Website(models.Model):
