@@ -18,8 +18,15 @@ class VulnerabilityAdmin(admin.ModelAdmin):
 @admin.register(Command)
 class CommandAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'description', 'tool', 'risk', 'speed', 'vulnerability', 'is_available')
-    list_filter = ('tool', 'risk', 'speed', 'vulnerability')
+    list_filter = ('tool', 'risk', 'speed', 'vulnerability', 'is_available')
     search_fields = ('description', 'arg', 'alert')
+
+    def is_available(self, obj):
+        if not obj.tool.is_available:
+            obj.is_available = False
+        else:
+            obj.is_available = True
+        obj.save()
 
 
 @admin.register(Website)

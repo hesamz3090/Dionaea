@@ -12,7 +12,7 @@ def create_address(address):
 
 
 def create_website_scan(username, address, description):
-    commands = Command.objects.filter(is_available=True)
+    commands = Command.objects.filter(is_available=True, tool__is_available=True)
     user = User.objects.get(username=username)
     address = create_address(address)
 
@@ -26,6 +26,7 @@ def create_website_scan(username, address, description):
     for command in commands:
         command_row = Command.objects.get(id=command.id)
         text = command_row.text.replace("$", address)
+        text = command.tool.text + ' ' + text
 
         Task.objects.create(
             user=user,
@@ -36,3 +37,15 @@ def create_website_scan(username, address, description):
     message = 'Scan Added'
 
     return message
+
+
+def stop_website_scan(id):
+    website = Website.objects.get(id=id)
+    website.status = 'Closed'
+    website.save()
+    return 'Done'
+
+
+def get_website_scan(id):
+    website = Website.objects.get(id=id)
+    return website

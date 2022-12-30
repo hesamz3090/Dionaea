@@ -19,6 +19,7 @@ time_list = (
 status_list = (
     ("new", "New"),
     ("working", "Working"),
+    ("Closed", "Closed"),
     ("completed", "Completed"),
 )
 
@@ -26,7 +27,7 @@ status_list = (
 class Tool(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     name = models.CharField(max_length=11)
-    text = models.TextField(default=name)
+    text = models.TextField()
     is_available = models.BooleanField(default=True)
 
     def __str__(self):
