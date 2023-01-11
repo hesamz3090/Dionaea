@@ -6,7 +6,7 @@ import standalone
 standalone.run('Dionaea.settings')
 from apps.scan.models import *
 
-start_time = time.process_time()
+start_time = time.time()
 
 tasks = Task.objects.filter(complete=False).order_by('id')[:50]
 
@@ -24,7 +24,7 @@ for task in tasks:
 
         output, err = process.communicate()
         result = (output + err).decode("utf-8")
-        task_end_time = (time.process_time() - start_time) / 60
+        task_end_time = (time.time() - start_time) / 60
         if task.command.word in result:
             task.found = True
 
@@ -38,7 +38,7 @@ for task in tasks:
         if left_task == 0:
             task.scan.percent = 100
             task.scan.status = 'COMPLETED'
-            scan_end_time = abs(round((time.process_time() - start_time) / 60, 2))
+            scan_end_time = abs(round((time.time() - start_time) / 60, 2))
 
         else:
             task.scan.percent = 100 - ((100 * left_task) / total_task)
@@ -46,5 +46,5 @@ for task in tasks:
         task.scan.save()
         task.save()
 
-cron_end_time = abs(round((time.process_time() - start_time) / 60, 2))
+cron_end_time = abs(round((time.time() - start_time) / 60, 2))
 print(cron_end_time)
