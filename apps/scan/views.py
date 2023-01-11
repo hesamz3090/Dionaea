@@ -1,8 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
-
 from apps.scan.forms import *
 from apps.scan.lib import *
 from apps.scan.models import *
