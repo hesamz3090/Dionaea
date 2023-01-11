@@ -31,7 +31,7 @@ class CommandAdmin(admin.ModelAdmin):
 
 @admin.register(Website)
 class WebsiteAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'address', 'description', 'percent', 'status', 'created_on')
+    list_display = ('id', 'user', 'address', 'description', 'percent', 'status', 'time_spend', 'created_on')
     list_filter = ('user', 'created_on', 'percent', 'status')
     search_fields = ('id', 'user', 'address', 'description')
 
@@ -44,6 +44,6 @@ class WebsiteAdmin(admin.ModelAdmin):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'scan', 'text', 'complete', 'found')
+    list_display = ('id', 'user', 'scan', 'text', 'complete', 'found', 'time_spend')
     list_filter = ('found', 'complete', 'user')
     search_fields = ('scan', 'user', 'id')

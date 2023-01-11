@@ -65,6 +65,7 @@ class Website(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     percent = models.IntegerField(default=0)
     status = models.CharField(choices=status_list, max_length=9, default='CREATED')
+    time_spend = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         return self.address
@@ -82,4 +83,5 @@ class Task(models.Model):
     text = models.CharField(max_length=500)
     found = models.BooleanField(default=False)
     complete = models.BooleanField(default=False)
+    time_spend = models.FloatField(blank=True, null=True)
     result = models.TextField(blank=True)
