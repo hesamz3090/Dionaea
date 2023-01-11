@@ -47,7 +47,7 @@ for task in tasks:
         task.save()
 
 if tasks.count() == 0:
-    websites = Website.objects.filter(complete=False)
+    websites = Website.objects.filter(status='STARTED')
     for website in websites:
         website.status = 'COMPLETED'
         website.percent = 100
