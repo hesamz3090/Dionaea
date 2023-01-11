@@ -1,19 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
-# from .lib import create_address
 
 risk_list = (
-    ("Information", "Information"),
-    ("Low", "Low"),
-    ("Medium", "Medium"),
-    ("High", "High"),
-    ("Critical", "Critical")
+    ("INFORMATION", "INFORMATION"),
+    ("LOW", "LOW"),
+    ("MEDIUM", "MEDIUM"),
+    ("HIGH", "HIGH"),
+    ("CRITICAL", "CRITICAL")
 )
 
 time_list = (
-    ("Fast", "Fast"),
-    ("Medium", "Medium"),
-    ("Slow", "Slow"),
+    ("FAST", "FAST"),
+    ("MEDIUM", "MEDIUM"),
+    ("SLOW", "SLOW"),
 )
 
 status_list = (
@@ -69,7 +68,7 @@ class Website(models.Model):
     status = models.CharField(choices=status_list, max_length=9, default='new')
 
     def __str__(self):
-        return f'{self.user} , {self.address}'
+        return self.address
 
     def save_model(self, request, obj):
         # self.address = create_address(self.address)

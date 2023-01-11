@@ -12,34 +12,10 @@ from apps.scan.models import *
 def scan_website(request):
     form = WebsiteForm(request.POST)
     query = Website.objects.filter(user=request.user)
-    scan_data_list = []
-    for scan in query:
-        found = Task.objects.filter(scan=scan, found=True)
-        address = scan.address.replace('http://', '') or scan.address.replace('https://', '')
-        information_risk = found.filter(command__risk='Information')
-        low_risk = found.filter(command__risk='Low')
-        medium_risk = found.filter(command__risk='Medium')
-        high_risk = found.filter(command__risk='High')
-        critical_risk = found.filter(command__risk='Critical')
-
-        scan_data = {
-            'id': scan.id,
-            'address': address,
-            'description': scan.description,
-            'found': found,
-            'information_risk_count': information_risk.count(),
-            'low_risk_count': low_risk.count(),
-            'medium_risk_count': medium_risk.count(),
-            'high_risk_count': high_risk.count(),
-            'critical_risk_count': critical_risk.count()
-        }
-
-        scan_data_list.append(scan_data)
 
     if request.method == 'POST':
         if form.is_valid():
-            form = WebsiteForm(request.POST)
-            query = Website.objects.filter(user=request.user)
+            print(form.cleaned_data.get('address'))
             address = create_address(form.cleaned_data.get('address'))
             description = form.cleaned_data.get('description')
             message = create_website_scan(request.user.username, address, description)
@@ -64,7 +40,6 @@ def scan_website(request):
         response = render(request, 'scan/scan_website.html', {
             'website_list': query,
             'website_form': form,
-            'scan_data': scan_data_list
         })
 
     return response
@@ -113,13 +88,23 @@ def scan_website_report(request, website_id):
 @login_required(login_url='login')
 def scan_website_action(request, action, scan_id):
     if request.method == 'GET':
+        form = WebsiteForm(request.POST)
+        query = Website.objects.filter(user=request.user)
 
         if action == 'START':
-            start_website_scan(scan_id)
+            message = start_website_scan(scan_id)
 
         elif action == 'STOP':
-            stop_website_scan(scan_id)
+            message = stop_website_scan(scan_id)
 
-    response = HttpResponseRedirect(reverse('scan_website'))
+        elif action == 'DELETE':
+            message = delete_website_scan(scan_id)
 
-    return response
+        response = render(request, 'scan/scan_website.html', {
+            'website_list': query,
+            'website_form': form,
+            'message': message,
+            'type': 'MESSAGE',
+        })
+
+        return response

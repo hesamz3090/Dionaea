@@ -53,6 +53,12 @@ def stop_website_scan(id):
     return 'Done'
 
 
+def delete_website_scan(id):
+    Task.objects.filter(scan__id=id).delete()
+    Website.objects.get(id=id).delete()
+    return 'Done'
+
+
 def get_website_scan(id):
     website = Website.objects.get(id=id)
     return website

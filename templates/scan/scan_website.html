@@ -68,6 +68,7 @@
                                             <th>Created</th>
                                             <th>Percent</th>
                                             <th>Status</th>
+                                            <th>Options</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
@@ -82,6 +83,11 @@
                                                 <td data-label="Created">{{ scan.created_on }}</td>
                                                 <td data-label="Percent">{{ scan.percent }} %</td>
                                                 <td data-label="Status">{{ scan.status }}</td>
+                                                <td data-label="Status">
+                                                    <a href="{% url 'scan_website_action' 'DELETE' scan.id %}">
+                                                        DELETE
+                                                    </a>
+                                                </td>
 
                                                 <td>
                                                     <div class="btn-list flex-nowrap">
@@ -96,7 +102,8 @@
                                                                 Stop
                                                             </a>
                                                         {% else %}
-                                                            <a href="{% url 'scan_website_report' scan.id %}"  class="btn">
+                                                            <a href="{% url 'scan_website_report' scan.id %}"
+                                                               class="btn">
                                                                 Report
                                                             </a>
                                                         {% endif %}
