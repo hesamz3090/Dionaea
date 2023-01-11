@@ -19,9 +19,9 @@ for task in tasks:
         )
 
         output, err = process.communicate()
-        result = output + err
+        result = (output + err).decode("utf-8")
 
-        if task.scan.word in str(result):
+        if task.command.word in result:
             task.found = True
 
         task.result = result

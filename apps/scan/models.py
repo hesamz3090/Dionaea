@@ -64,8 +64,7 @@ class Website(models.Model):
     description = models.TextField(max_length=500, blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     percent = models.IntegerField(default=0)
-    filter = models.CharField(max_length=50, blank=True, null=True)
-    status = models.CharField(choices=status_list, max_length=9, default='new')
+    status = models.CharField(choices=status_list, max_length=9, default='CREATED')
 
     def __str__(self):
         return self.address
@@ -82,4 +81,5 @@ class Task(models.Model):
     command = models.ForeignKey(Command, on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
     found = models.BooleanField(default=False)
+    complete = models.BooleanField(default=False)
     result = models.TextField(blank=True)
