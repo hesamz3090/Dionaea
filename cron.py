@@ -8,7 +8,7 @@ from apps.scan.models import *
 
 start_time = time.process_time()
 
-tasks = Task.objects.filter(result='').order_by('id')[:50]
+tasks = Task.objects.filter(complete=False).order_by('id')[:50]
 
 for task in tasks:
     if task.scan.status == 'STOPPED':
@@ -30,15 +30,15 @@ for task in tasks:
 
         task.result = result
         task.complete = True
-        task.time_spend = round((task_end_time - start_time) / 60, 2)
+        task.time_spend = abs(round((task_end_time - start_time) / 60, 2))
 
-        left_task = Task.objects.filter(scan=task.scan, complete=True).count()
+        left_task = Task.objects.filter(scan=task.scan, complete=False).count()
         total_task = Task.objects.filter(scan=task.scan).count()
 
         if left_task == 0:
             task.scan.percent = 100
             task.scan.status = 'COMPLETED'
-            scan_end_time = round((time.process_time() - start_time) / 60, 2)
+            scan_end_time = abs(round((time.process_time() - start_time) / 60, 2))
 
         else:
             task.scan.percent = 100 - ((100 * left_task) / total_task)
@@ -46,5 +46,5 @@ for task in tasks:
         task.scan.save()
         task.save()
 
-cron_end_time = round((time.process_time() - start_time) / 60, 2)
+cron_end_time = abs(round((time.process_time() - start_time) / 60, 2))
 print(cron_end_time)
