@@ -5,10 +5,13 @@ import standalone
 
 standalone.run('Dionaea.settings')
 from apps.scan.models import *
+from website.models import *
+
+setting = Setting.objects.get(username='hesamz3090')
 
 start_time = time.time()
 
-tasks = Task.objects.filter(complete=False, scan__status='STARTED').order_by('id')[:50]
+tasks = Task.objects.filter(complete=False, scan__status='STARTED').order_by('id')[:setting.max_task]
 
 for task in tasks:
     process = subprocess.Popen(
@@ -51,4 +54,5 @@ if tasks.count() == 0:
         website.save()
 
 cron_end_time = abs(round((time.time() - start_time) / 60, 2))
-print(cron_end_time)
+setting.spend_time = cron_end_time
+setting.save()

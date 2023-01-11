@@ -17,6 +17,14 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Setting)
 class SettingAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Personal', {
+            'fields': ('user',)
+        }),
+        ('Cronjob', {
+            'fields': ('max_task', 'spend_time')
+        }),
+    )
 
     def get_queryset(self, request):
         qs = super(SettingAdmin, self).get_queryset(request)
@@ -24,7 +32,7 @@ class SettingAdmin(admin.ModelAdmin):
             return qs
         return qs.filter(user=request.user)
 
-    list_display = ('id', 'user')
+    list_display = ('id', 'user', 'max_task', 'spend_time')
     search_fields = ('id', 'user')
 
 
