@@ -15,6 +15,9 @@ Install requirements :
 ```
 sudo apt install python-pip python2 python3 python2.7-dev git perl sslscan snapd -y
 sudo apt install wapiti whatweb nmap dnsrecon fierce dnswalk whois dnsenum dmitry nikto dnsmap dirb wafw00f -y
+sudo apt install python3-pip
+sudo apt install python-pip
+sudo apt install python3-virtualenv
 ```
 
 Upgrade Pip And Install Requirements :
