@@ -22,10 +22,6 @@ def scan_website(request):
         high_risk = found.filter(command__risk='High')
         critical_risk = found.filter(command__risk='Critical')
 
-        # found_list = []
-        # for item in found:
-        #     found_row = [item.id,item.va]
-
         scan_data = {
             'id': scan.id,
             'address': address,
@@ -42,6 +38,8 @@ def scan_website(request):
 
     if request.method == 'POST':
         if form.is_valid():
+            form = WebsiteForm(request.POST)
+            query = Website.objects.filter(user=request.user)
             address = create_address(form.cleaned_data.get('address'))
             description = form.cleaned_data.get('description')
             message = create_website_scan(request.user.username, address, description)
@@ -53,6 +51,8 @@ def scan_website(request):
             })
         else:
             message = form.errors
+            form = WebsiteForm(request.POST)
+            query = Website.objects.filter(user=request.user)
             response = render(request, 'scan/scan_website.html', {
                 'website_list': query,
                 'website_form': form,

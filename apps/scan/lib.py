@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from website.models import Profile
 from .models import Command, Website, Task
 
 
