@@ -20,7 +20,7 @@ def create_website_scan(username, address, description):
         user=user,
         address=create_address(address),
         description=description,
-        status='new',
+        status='CREATED',
     )
 
     for command in commands:
@@ -39,9 +39,16 @@ def create_website_scan(username, address, description):
     return message
 
 
+def start_website_scan(id):
+    website = Website.objects.get(id=id)
+    website.status = 'STARTED'
+    website.save()
+    return 'Done'
+
+
 def stop_website_scan(id):
     website = Website.objects.get(id=id)
-    website.status = 'Closed'
+    website.status = 'STOPPED'
     website.save()
     return 'Done'
 

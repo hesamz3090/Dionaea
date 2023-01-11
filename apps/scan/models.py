@@ -17,10 +17,10 @@ time_list = (
 )
 
 status_list = (
-    ("new", "New"),
-    ("working", "Working"),
-    ("closed", "Closed"),
-    ("completed", "Completed"),
+    ("CREATED", "CREATED"),
+    ("STARTED", "STARTED"),
+    ("STOPPED", "STOPPED"),
+    ("COMPLETED", "COMPLETED"),
 )
 
 

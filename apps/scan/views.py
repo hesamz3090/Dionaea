@@ -30,53 +30,19 @@ def scan_website(request):
             })
 
     else:
+        if request.GET['ACTION']:
+            action = request.GET['ACTION']
+            scan_id = request.GET['SCAN_ID']
+
+            if action == 'START':
+                start_website_scan(scan_id)
+
+            elif action == 'STOP':
+                stop_website_scan(scan_id)
+
+        form = WebsiteForm(request.POST)
+        query = Website.objects.filter(user=request.user)
+
         response = render(request, 'scan/scan_website.html', {'website_list': query, 'website_form': form})
 
     return response
-
-#
-# @login_required(login_url='login')
-# def order(request):
-#     orders = Website.objects.all()
-#     response = render(request, 'dashboard/orders.html', {'orders': orders})
-#     return response
-#
-#
-# @login_required(login_url='login')
-# def task(request, order):
-#     if request.user.is_authenticated:
-#         current_user = request.user
-#         tasks = Task.objects.filter(order_id=order, user__order=current_user.id)
-#         order = Website.objects.get(id=order)
-#
-#         information = order.found.filter(risk="Information")
-#         low = order.found.filter(risk="Information")
-#         medium = order.found.filter(risk="Medium")
-#         high = order.found.filter(risk="High")
-#         critical = order.found.filter(risk="Critical")
-#
-#         total = order.found.all()
-#
-#         response = render(request, 'dashboard/details.html', {
-#             'total': total,
-#             'tasks': tasks.count(),
-#             'count_information': information.count(),
-#             'count_low': low.count(),
-#             'count_medium': medium.count(),
-#             'count_high': high.count(),
-#             'count_critical': critical.count(),
-#             'count_total': total.count(),
-#             'information': information,
-#             'url': order.address,
-#         })
-#
-#     else:
-#         response = render(request, 'dashboard/login.html', {})
-#     return response
-#
-#
-# @login_required(login_url='login')
-# def details(request, order):
-#     tasks = Task.objects.all(order_id=order)
-#     response = render(request, 'dashboard/details.html', {'tasks': tasks})
-#     return response

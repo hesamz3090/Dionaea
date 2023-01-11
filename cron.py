@@ -7,9 +7,9 @@ from apps.scan.models import *
 tasks = Task.objects.filter(result='').order_by('id')[:50]
 
 for task in tasks:
-    if task.scan.status == 'closed':
+    if task.scan.status == 'STOPPED':
         task.delete()
-    else:
+    elif task.scan.status == 'STARTED':
         process = subprocess.Popen(
             [task.text],
             stdin=subprocess.PIPE,
@@ -31,7 +31,7 @@ for task in tasks:
 
         if left_task == 0:
             task.scan.percent = 100
-            task.scan.status = 'completed'
+            task.scan.status = 'COMPLETED'
 
         else:
             task.scan.percent = ((100 * left_task) / total_task)
