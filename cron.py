@@ -46,5 +46,13 @@ for task in tasks:
         task.scan.save()
         task.save()
 
+if tasks.count() == 0:
+    websites = Website.objects.filter(complete=False)
+    for website in websites:
+        website.status = 'COMPLETED'
+        website.percent = 100
+        website.save()
+
+
 cron_end_time = abs(round((time.time() - start_time) / 60, 2))
 print(cron_end_time)
