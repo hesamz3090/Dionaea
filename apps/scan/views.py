@@ -15,7 +15,6 @@ def scan_website(request):
 
     if request.method == 'POST':
         if form.is_valid():
-            print(form.cleaned_data.get('address'))
             address = create_address(form.cleaned_data.get('address'))
             description = form.cleaned_data.get('description')
             message = create_website_scan(request.user.username, address, description)
