@@ -47,7 +47,7 @@ class Command(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     tool = models.ForeignKey(Tool, on_delete=models.CASCADE)
     description = models.CharField(max_length=100)
-    arg = models.TextField()
+    args = models.TextField()
     risk = models.CharField(choices=risk_list, max_length=11)
     vulnerability = models.ForeignKey(Vulnerability, on_delete=models.CASCADE)
     alert = models.TextField(max_length=100)
@@ -56,7 +56,7 @@ class Command(models.Model):
     is_available = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.arg
+        return self.args
 
 
 class Website(models.Model):
@@ -80,6 +80,7 @@ class Website(models.Model):
 class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     scan = models.ForeignKey(Website, on_delete=models.CASCADE)
+    command = models.ForeignKey(Command, on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
     found = models.BooleanField(default=False)
     result = models.TextField(blank=True)

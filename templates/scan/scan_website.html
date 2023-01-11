@@ -74,34 +74,36 @@
 
                                         <tbody>
 
-                                            {% for scan in website_list %}
-                                                <tr>
-                                            <td data-label="ID" class="text-muted">{{ scan.id }}</td>
-                                            <td data-label="Address">{{ scan.address }}</td>
-                                            <td data-label="Description">{{ scan.description }}</td>
-                                            <td data-label="Created">{{ scan.created_on }}</td>
-                                            <td data-label="Percent">{{ scan.percent }} %</td>
-                                            <td data-label="Status">{{ scan.status.capitalize }}</td>
+                                        {% for scan in website_list %}
+                                            <tr>
+                                                <td data-label="ID" class="text-muted">{{ scan.id }}</td>
+                                                <td data-label="Address">{{ scan.address }}</td>
+                                                <td data-label="Description">{{ scan.description }}</td>
+                                                <td data-label="Created">{{ scan.created_on }}</td>
+                                                <td data-label="Percent">{{ scan.percent }} %</td>
+                                                <td data-label="Status">{{ scan.status }}</td>
 
-                                            <td>
-                                                <div class="btn-list flex-nowrap">
-                                                    {% if scan.status == 'new' %}
-                                                        <a href="#" class="btn">
-                                                            Start
-                                                        </a>
-                                                    {% elif scan.status == 'working' %}
-                                                        <a href="#" class="btn">
-                                                            Stop
-                                                        </a>
-                                                    {% elif scan.status == 'completed' %}
-                                                        <a href="#" class="btn">
-                                                            Report
-                                                        </a>
-                                                    {% endif %}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                            {% endfor %}
+                                                <td>
+                                                    <div class="btn-list flex-nowrap">
+                                                        {% if scan.status == 'CREATED' %}
+                                                            <a href="{% url 'scan_website_action' 'START' scan.id %}"
+                                                               class="btn">
+                                                                Start
+                                                            </a>
+                                                        {% elif scan.status == 'STARTED' %}
+                                                            <a href="{% url 'scan_website_action' 'STOP' scan.id %}"
+                                                               class="btn">
+                                                                Stop
+                                                            </a>
+                                                        {% else %}
+                                                            <a href="{% url 'scan_website_report' scan.id %}"  class="btn">
+                                                                Report
+                                                            </a>
+                                                        {% endif %}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
 
                                         </tbody>
 
@@ -153,7 +155,8 @@
                         </a>
                         <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                 viewBox="0 0 24 24"
                                  stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                                  stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

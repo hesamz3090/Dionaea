@@ -19,7 +19,7 @@ class VulnerabilityAdmin(admin.ModelAdmin):
 class CommandAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'description', 'tool', 'risk', 'speed', 'vulnerability', 'is_available')
     list_filter = ('tool', 'risk', 'speed', 'vulnerability', 'is_available')
-    search_fields = ('description', 'arg', 'alert')
+    search_fields = ('description', 'args', 'alert')
 
     def is_available(self, obj):
         if not obj.tool.is_available:

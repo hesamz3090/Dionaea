@@ -1,9 +1,8 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from .views import *
 
 urlpatterns = [
     path('scan_website/', scan_website, name='scan_website'),
-    # path('task/<int:order>', task, name='task'),
-    # path('details/<int:order>', details, name='details'),
+    path('scan_website_action/<str:action>/<int:scan_id>', scan_website_action, name='scan_website_action'),
+    path('scan_website_report/<int:website_id>', scan_website_report, name='scan_website_report'),
 ]

@@ -25,13 +25,14 @@ def create_website_scan(username, address, description):
 
     for command in commands:
         command_row = Command.objects.get(id=command.id)
-        text = command_row.text.replace("$", address)
+        text = command_row.args.replace("$", address)
         text = command.tool.text + ' ' + text
 
         Task.objects.create(
             user=user,
             scan=scan,
             text=text,
+            command=command_row
         )
 
     message = 'Scan Added'

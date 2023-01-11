@@ -27,6 +27,7 @@ class WebsiteForm(forms.Form):
             }
         ),
         label='Description',
+        required=False
     )
 
     def save(self, request):
