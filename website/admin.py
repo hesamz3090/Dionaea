@@ -22,7 +22,7 @@ class SettingAdmin(admin.ModelAdmin):
             'fields': ('user',)
         }),
         ('Cronjob', {
-            'fields': ('max_task', 'spend_time')
+            'fields': ('max_task',)
         }),
     )
 
@@ -54,13 +54,6 @@ class ContactAdmin(admin.ModelAdmin):
     list_filter = ('subject', 'created_on')
     search_fields = ('id', 'title', 'first_name', 'last_name', 'email', 'phone', 'subject', 'created_on')
 
-
-# @admin.register(Ticket)
-# class TicketAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'title', 'user', 'subject', 'answer', 'created_on')
-#     list_filter = ('subject', 'created_on')
-#     search_fields = ('id', 'title', 'subject', 'created_on')
-#
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):

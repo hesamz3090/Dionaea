@@ -7,7 +7,7 @@ standalone.run('Dionaea.settings')
 from apps.scan.models import *
 from website.models import *
 
-setting = Setting.objects.get(username='hesamz3090')
+setting = Setting.objects.get(user__username='hesamz3090')
 
 start_time = time.time()
 
@@ -54,5 +54,6 @@ if tasks.count() == 0:
         website.save()
 
 cron_end_time = abs(round((time.time() - start_time) / 60, 2))
-setting.spend_time = cron_end_time
-setting.save()
+if cron_end_time > setting.spend_time:
+    setting.spend_time = cron_end_time
+    setting.save()
