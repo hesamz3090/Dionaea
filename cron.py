@@ -38,7 +38,6 @@ for task in tasks:
     if left_task == 0:
         task.scan.percent = 100
         task.scan.status = 'COMPLETED'
-        scan_end_time = abs(round((time.time() - start_time) / 60, 2))
 
     else:
         task.scan.percent = 100 - ((100 * left_task) / total_task)
