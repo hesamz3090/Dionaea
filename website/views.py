@@ -19,13 +19,25 @@ def home(request):
     vulnerability_count = Vulnerability.objects.all().count()
     website_count = Website.objects.all().count()
     fast_scan_form = FastWebsiteScanForm()
-    response = render(request, 'home.html', {
-        'tools_count': tools_count,
-        'command_count': command_count,
-        'vulnerability_count': vulnerability_count,
-        'website_count': website_count,
-        'fast_scan_form': fast_scan_form,
-    })
+
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user=request.user)
+        response = render(request, 'home.html', {
+            'tools_count': tools_count,
+            'command_count': command_count,
+            'vulnerability_count': vulnerability_count,
+            'website_count': website_count,
+            'fast_scan_form': fast_scan_form,
+            'profile': profile,
+        })
+    else:
+        response = render(request, 'home.html', {
+            'tools_count': tools_count,
+            'command_count': command_count,
+            'vulnerability_count': vulnerability_count,
+            'website_count': website_count,
+            'fast_scan_form': fast_scan_form,
+        })
     return response
 
 
