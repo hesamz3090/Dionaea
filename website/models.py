@@ -20,7 +20,6 @@ status_list = (
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     phone = models.IntegerField(blank=True, null=True)
-    left_day = models.IntegerField(default=0)
     referral = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -28,7 +27,9 @@ class Profile(models.Model):
         blank=True,
         null=True
     )
+    premium = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
+    credit = models.IntegerField(default=0)
 
     def __str__(self):
         return self.user.username

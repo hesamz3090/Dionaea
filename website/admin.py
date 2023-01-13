@@ -11,7 +11,7 @@ class ProfileAdmin(admin.ModelAdmin):
             return qs
         return qs.filter(user=request.user)
 
-    list_display = ('id', 'user', 'phone', 'left_day', 'referral', 'verified')
+    list_display = ('id', 'user', 'phone', 'premium', 'verified', 'referral', 'credit')
     search_fields = ('id', 'user')
 
 
