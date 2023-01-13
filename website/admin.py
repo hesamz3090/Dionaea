@@ -48,6 +48,13 @@ class DocumentAdmin(admin.ModelAdmin):
         obj.save()
 
 
+@admin.register(Ticket)
+class TicketAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'user', 'subject', 'status', 'created_on')
+    list_filter = ('subject', 'status', 'created_on')
+    search_fields = ('id', 'title', 'subject', 'created_on')
+
+
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'first_name', 'last_name', 'email', 'phone', 'subject', 'created_on')
