@@ -1,3 +1,4 @@
+from django.contrib import messages
 from apps.scan.forms import *
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -66,24 +67,14 @@ def ticket(request):
         if form.is_valid():
             form.save(request)
             message = 'Done'
-
-            tickets = Ticket.objects.filter(user=request.user)
-            response = render(request, 'ticket.html', {
-                'form': form,
-                'tickets': tickets,
-                'message': message,
-                'type': 'MESSAGE'
-            })
+            messages.success(request, message)
 
         else:
             message = form.errors
-            tickets = Ticket.objects.filter(user=request.user)
-            response = render(request, 'ticket.html', {
-                'form': form,
-                'tickets': tickets,
-                'message': message,
-                'type': 'MESSAGE'
-            })
+            messages.error(request, message)
+
+        response = HttpResponseRedirect(reverse('ticket'))
+
     else:
         tickets = Ticket.objects.filter(user=request.user)
         response = render(request, 'ticket.html', {'form': form, 'tickets': tickets})
@@ -106,19 +97,14 @@ def profile(request):
         if form.is_valid():
             form.update(request)
             message = 'Done'
-            response = render(request, 'profile.html', {
-                'form': form,
-                'message': message,
-                'type': 'MESSAGE'
-            })
+            messages.success(request, message)
 
         else:
             message = form.errors
-            response = render(request, 'profile.html', {
-                'form': form,
-                'message': message,
-                'type': 'ERORR'
-            })
+            messages.error(request, message)
+
+        response = HttpResponseRedirect(reverse('profile'))
+
     else:
         response = render(request, 'profile.html', {'form': form})
     return response
@@ -146,20 +132,13 @@ def contact(request):
         if form.is_valid():
             form.save()
             message = 'Done'
-            response = render(request, 'contact.html', {
-                'form': form,
-                'message': message,
-                'type': 'MESSAGE'
-            })
+            messages.success(request, message)
 
         else:
             message = form.errors
-            response = render(request, 'contact.html', {
-                'form': form,
-                'message': message,
-                'type': 'ERORR'
-            })
+            messages.error(request, message)
 
+        response = HttpResponseRedirect(reverse('profile'))
     else:
         form = ContactForm(request.POST)
         response = render(request, 'contact.html', {'form': form})
@@ -177,21 +156,17 @@ def login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 auth_login(request, user)
+                message = 'Wellcome Back'
+                messages.success(request, message)
                 response = HttpResponseRedirect(reverse('dashboard'))
             else:
                 message = 'Username Or Password Is Wrong'
-                response = render(request, 'login.html', {
-                    'form': form,
-                    'message': message,
-                    'type': 'ERORR'
-                })
+                messages.error(request, message)
+                response = HttpResponseRedirect(reverse('login'))
         else:
             message = form.errors
-            response = render(request, 'login.html', {
-                'form': form,
-                'message': message,
-                'type': 'ERORR'
-            })
+            messages.error(request, message)
+            response = HttpResponseRedirect(reverse('login'))
 
     else:
         if request.user.is_authenticated:
@@ -213,23 +188,20 @@ def register(request):
             if not user_exist:
                 user = form.save(request)
                 auth_login(request, user)
+                message = 'Wellcome To Dionaea'
+                messages.success(request, message)
                 response = HttpResponseRedirect(reverse('dashboard'))
 
             else:
                 message = 'User Is Exist'
-                response = render(request, 'register.html', {
-                    'form': form,
-                    'message': message,
-                    'type': 'ERORR'
-                })
-
+                messages.error(request, message)
+                response = HttpResponseRedirect(reverse('register'))
 
         else:
             message = form.errors
+            messages.error(request, message)
             response = render(request, 'register.html', {
                 'form': form,
-                'message': message,
-                'type': 'ERORR'
             })
     else:
         if request.user.is_authenticated:
@@ -249,26 +221,17 @@ def forget(request):
 
             if not user:
                 message = 'User Not Found'
-                response = render(request, 'forget.html', {
-                    'form': form,
-                    'message': message,
-                    'type': 'ERORR'
-                })
+                messages.error(request, message)
+                response = HttpResponseRedirect(reverse('forget'))
             else:
-                message = 'Done'
-                response = render(request, 'forget.html', {
-                    'form': form,
-                    'message': message,
-                    'type': 'MESSAGE'
-                })
+                message = 'Rest Password Email Send'
+                messages.success(request, message)
+                response = HttpResponseRedirect(reverse('forget'))
 
         else:
             message = form.errors
-            response = render(request, 'forget.html', {
-                'form': form,
-                'message': message,
-                'type': 'ERORR'
-            })
+            messages.error(request, message)
+            response = HttpResponseRedirect(reverse('forget'))
     else:
         if request.user.is_authenticated:
             response = HttpResponseRedirect(reverse('dashboard'))
@@ -282,6 +245,8 @@ def forget(request):
 @login_required(login_url='login')
 def logout(request):
     auth_logout(request)
+    message = 'You Have Successfully logged Out'
+    messages.success(request, message)
     response = HttpResponseRedirect(reverse('login'))
     return response
 

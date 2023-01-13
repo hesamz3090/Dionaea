@@ -43,20 +43,20 @@ def start_website_scan(id):
     website = Website.objects.get(id=id)
     website.status = 'STARTED'
     website.save()
-    return 'Done'
+    return 'Scan Started'
 
 
 def stop_website_scan(id):
     website = Website.objects.get(id=id)
     website.status = 'STOPPED'
     website.save()
-    return 'Done'
+    return 'Scan Stopped'
 
 
 def delete_website_scan(id):
     Task.objects.filter(scan__id=id).delete()
     Website.objects.get(id=id).delete()
-    return 'Done'
+    return 'Scan Deleted'
 
 
 def get_website_scan(id):
