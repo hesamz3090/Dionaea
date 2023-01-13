@@ -33,8 +33,8 @@ def home(request):
 def dashboard(request):
     profile = Profile.objects.get(user=request.user)
     website_list = Website.objects.filter(user=profile.user)
-    website_list_complete = website_list.filter(status='completed')
-    website_list_working = website_list.filter(status='working')
+    website_list_complete = website_list.filter(status='COMPLETED')
+    website_list_started = website_list.filter(status='STARTED')
 
     tools = Tool.objects.all()
     commands = Command.objects.all()
@@ -50,7 +50,7 @@ def dashboard(request):
     response = render(request, 'dashboard.html', {
         'website_list_all_count': website_list.count(),
         'website_list_complete_count': website_list_complete.count(),
-        'website_list_working_count': website_list_working.count(),
+        'website_list_working_count': website_list_started.count(),
         'tools_list': tools_list,
         'vulnerability_list': vulnerabilities,
         'profile': profile,
