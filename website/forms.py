@@ -136,6 +136,17 @@ class LoginForm(forms.Form):
         label='Password',
     )
 
+    remember_me = forms.CharField(
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'password',
+                'data-validate-field': 'loginPassword'
+            }
+        ),
+        label='remember_me',
+        required=False,
+    )
 
 class RegisterForm(forms.Form):
     username = forms.CharField(

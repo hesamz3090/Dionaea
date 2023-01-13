@@ -153,10 +153,14 @@ def login(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
+            remember_me = form.cleaned_data.get('remember_me')
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 auth_login(request, user)
-                message = 'Wellcome Back'
+                message = 'Welcome Back'
+                if not remember_me:
+                    request.session.set_expiry(0)
+                    request.session.modified = True
                 messages.success(request, message)
                 response = HttpResponseRedirect(reverse('dashboard'))
             else:
