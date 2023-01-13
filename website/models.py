@@ -21,9 +21,14 @@ class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     phone = models.IntegerField(blank=True, null=True)
     left_day = models.IntegerField(default=0)
-    free_try = models.BooleanField(default=False)
-    user_verified = models.BooleanField(default=False)
-    email_verified = models.BooleanField(default=False)
+    referral = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='website_profile_referral',
+        blank=True,
+        null=True
+    )
+    verified = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username

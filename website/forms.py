@@ -140,13 +140,13 @@ class LoginForm(forms.Form):
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'form-control',
-                'id': 'password',
-                'data-validate-field': 'loginPassword'
+                'id': 'remember_me',
             }
         ),
         label='remember_me',
         required=False,
     )
+
 
 class RegisterForm(forms.Form):
     username = forms.CharField(
@@ -173,6 +173,18 @@ class RegisterForm(forms.Form):
         label='Password',
     )
 
+    referral = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'referral',
+            }
+        ),
+        max_length=50,
+        label='Referral',
+        required=False,
+    )
+
     def save(self, request):
         user = User.objects.create(
             username=self.cleaned_data.get('username'),
@@ -181,6 +193,7 @@ class RegisterForm(forms.Form):
 
         Profile.objects.create(
             user=user,
+            referral=self.cleaned_data.get('referral'),
         )
         return user
 
@@ -295,6 +308,17 @@ class ProfileForm(forms.Form):
         label='phone'
     )
 
+    referral = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'referral',
+            }
+        ),
+        max_length=50,
+        label='Referral',
+        required=False,
+    )
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
