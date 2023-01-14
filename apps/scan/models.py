@@ -35,8 +35,7 @@ class Tool(models.Model):
 
 class Vulnerability(models.Model):
     name = models.CharField(max_length=50)
-    tips = models.TextField()
-    fix = models.TextField()
+    description = models.TextField()
 
     def __str__(self):
         return self.name

@@ -38,18 +38,26 @@ def scan_website(request):
 def scan_website_report(request, website_id):
     scan = Website.objects.get(id=website_id, user=request.user)
     found = Task.objects.filter(scan__id=scan.id, found=True, user=request.user)
-    address = scan.address.replace('http://', '') or scan.address.replace('https://', '')
+
     information_risk = found.filter(command__risk='INFORMATION')
     low_risk = found.filter(command__risk='LOW')
     medium_risk = found.filter(command__risk='MEDIUM')
     high_risk = found.filter(command__risk='HIGH')
     critical_risk = found.filter(command__risk='CRITICAL')
 
+    if 'http://' in scan.address:
+        address = scan.address.replace('http://', '')
+    if 'https://' in scan.address:
+        address = scan.address.replace('https://', '')
+    if scan.address[-1] == '/':
+        address = address[:len(address)-1]
+
     found_list = []
     for item in found:
         found_row = {
             'id': item.id,
             'vulnerability_name': item.command.vulnerability.name,
+            'vulnerability_description': item.command.vulnerability.description,
             'description': item.command.description,
             'tool_name': item.command.tool.name,
             'risk': item.command.risk
@@ -59,6 +67,7 @@ def scan_website_report(request, website_id):
     scan_data = {
         'id': scan.id,
         'address': address,
+        'created': scan.created_on,
         'description': scan.description,
         'found': found_list,
         'information_risk_count': information_risk.count(),

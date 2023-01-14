@@ -31,14 +31,14 @@ CSRF_TRUSTED_ORIGINS = ['https://www.thedionaea.com', 'https://thedionaea.com']
 # Application definition
 JAZZMIN_SETTINGS = {
     "site_title": "Dionaea",
-    "site_header": "Dionaea_header",
-    "site_brand": "Dionaea_brand",
+    "site_header": "The Dionaea",
+    "site_brand": "The Dionaea",
     "site_icon": "images/favicon.png",
     # Add your own branding here
     "site_logo": None,
     "welcome_sign": "Welcome to the Dionaea",
     # Copyright on the footer
-    "copyright": "Dionaea",
+    "copyright": "The Dionaea",
     "user_avatar": None,
     ############
     # Top Menu #
