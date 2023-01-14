@@ -45,5 +45,5 @@ class WebsiteAdmin(admin.ModelAdmin):
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'scan', 'text', 'complete', 'found', 'time_spend')
-    list_filter = ('found', 'complete', 'user')
+    list_filter = ('found', 'user', 'scan', 'complete')
     search_fields = ('scan', 'user', 'id')
