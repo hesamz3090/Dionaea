@@ -38,6 +38,7 @@ class Profile(models.Model):
 class Setting(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     max_task = models.IntegerField(default=100)
+    is_active = models.BooleanField(default=False)
     spend_time = models.FloatField(blank=True, null=True, editable=False)
 
     def __str__(self):

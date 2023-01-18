@@ -6,13 +6,14 @@ from apps.scan.models import *
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.core.paginator import Paginator
 
 
 @login_required(login_url='login')
 def scan_website(request):
     form = WebsiteForm(request.POST)
-    query = Website.objects.filter(user=request.user)
-
+    query = Website.objects.filter(user=request.user).order_by('id')
+    query_count = query.count()
     if request.method == 'POST':
         if form.is_valid():
             address = create_address(form.cleaned_data.get('address'))
@@ -26,9 +27,17 @@ def scan_website(request):
             response = HttpResponseRedirect(reverse('scan_website'))
 
     else:
+
+        page = int(request.GET.get('page')) if request.GET.get('page') else 1
+        paginator = Paginator(query, 20)
+        query = paginator.get_page(1)
+
+        count_list = paginator.get_elided_page_range(number=page, on_each_side=9)
         response = render(request, 'scan/scan_website.html', {
             'website_list': query,
+            'count_list': count_list,
             'website_form': form,
+            'page': page,
         })
 
     return response
@@ -50,7 +59,7 @@ def scan_website_report(request, website_id):
     if 'https://' in scan.address:
         address = scan.address.replace('https://', '')
     if scan.address[-1] == '/':
-        address = address[:len(address)-1]
+        address = address[:len(address) - 1]
 
     found_list = []
     for item in found:

@@ -22,7 +22,7 @@ class SettingAdmin(admin.ModelAdmin):
             'fields': ('user',)
         }),
         ('Cronjob', {
-            'fields': ('max_task',)
+            'fields': ('max_task', 'is_active')
         }),
     )
 
