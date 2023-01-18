@@ -78,8 +78,16 @@ if not setting.is_active:
             if os.path.isfile(os.path.join(path, file)) and 'temp' in file:
                 os.remove(path + file)
 
+    url = f'https://api.telegram.org/bot5358693137:AAG7SgFfuo2VtjWc3nR_r8RhpXfNSAXALKI/sendMessage?chat_id=5970578512&text={cron_end_time}'
+    requests.get(url)
+    
     setting.is_active = False
     setting.save()
+
+else:
+    url = f'https://api.telegram.org/bot5358693137:AAG7SgFfuo2VtjWc3nR_r8RhpXfNSAXALKI/sendMessage?chat_id=5970578512&text=Activated'
+    requests.get(url)
+
 
 url = f'https://api.telegram.org/bot5358693137:AAG7SgFfuo2VtjWc3nR_r8RhpXfNSAXALKI/sendMessage?chat_id=5970578512&text=END'
 requests.get(url)

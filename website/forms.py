@@ -136,14 +136,14 @@ class LoginForm(forms.Form):
         label='Password',
     )
 
-    remember_me = forms.CharField(
+    remember_me = forms.BooleanField(
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-check-input',
                 'id': 'remember_me',
             }
         ),
-        label='remember_me',
+        label='Remember Me On This Device',
         required=False,
     )
 
@@ -190,11 +190,16 @@ class RegisterForm(forms.Form):
             username=self.cleaned_data.get('username'),
             password=make_password(self.cleaned_data.get('password'))
         )
-
-        Profile.objects.create(
-            user=user,
-            referral=self.cleaned_data.get('referral'),
-        )
+        if self.cleaned_data.get('referral'):
+            referral = User.objects.get(username=self.cleaned_data.get('referral'))
+            Profile.objects.create(
+                user=user,
+                referral=referral,
+            )
+        else:
+            Profile.objects.create(
+                user=user,
+            )
         return user
 
 
