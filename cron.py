@@ -1,18 +1,22 @@
 import subprocess
 import time
 import os
+
+import requests
 import standalone
 
 standalone.run('Dionaea.settings')
 from apps.scan.models import *
 from website.models import *
 
-url = f'https://api.telegram.org/bot5358693137:AAG7SgFfuo2VtjWc3nR_r8RhpXfNSAXALKI/sendMessage?chat_id=5970578512&text=END'
+url = f'https://api.telegram.org/bot5358693137:AAG7SgFfuo2VtjWc3nR_r8RhpXfNSAXALKI/sendMessage?chat_id=5970578512&text=Start'
+requests.get(url)
 
 path_list = ['/home/gardener/', '/home/gardener/Dionaea/']
 setting = Setting.objects.get(user__username='hesamz3090')
 start_time = time.time()
 
+Website.objects.filter(status='COMPLETED', is_fast=True).delete()
 website_obj = Website.objects.filter(status='STARTED')
 
 for obj in website_obj:
@@ -74,7 +78,8 @@ if not setting.is_active:
             if os.path.isfile(os.path.join(path, file)) and 'temp' in file:
                 os.remove(path + file)
 
-    url = f'https://api.telegram.org/bot5358693137:AAG7SgFfuo2VtjWc3nR_r8RhpXfNSAXALKI/sendMessage?chat_id=5970578512&text=END'
-
     setting.is_active = False
     setting.save()
+
+url = f'https://api.telegram.org/bot5358693137:AAG7SgFfuo2VtjWc3nR_r8RhpXfNSAXALKI/sendMessage?chat_id=5970578512&text=END'
+requests.get(url)
