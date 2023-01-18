@@ -64,6 +64,7 @@ class Website(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     percent = models.IntegerField(default=0)
     status = models.CharField(choices=status_list, max_length=9, default='CREATED')
+    is_fast = models.BooleanField(default=True)
 
     def __str__(self):
         return self.address

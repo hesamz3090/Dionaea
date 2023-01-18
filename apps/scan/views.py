@@ -13,14 +13,19 @@ from django.core.paginator import Paginator
 def scan_website(request):
     form = WebsiteForm(request.POST)
     query = Website.objects.filter(user=request.user).order_by('id')
-    query_count = query.count()
+
     if request.method == 'POST':
         if form.is_valid():
             address = create_address(form.cleaned_data.get('address'))
-            description = form.cleaned_data.get('description')
-            message = create_website_scan(request.user.username, address, description)
-            messages.success(request, message)
-            response = HttpResponseRedirect(reverse('scan_website'))
+            if request.POST.get('submit') == 'FAST':
+                message = create_website_scan(request.user.username, address, 'FAST SCAN', True)
+                messages.success(request, message)
+                response = HttpResponseRedirect(reverse('home'))
+            else:
+                description = form.cleaned_data.get('description')
+                message = create_website_scan(request.user.username, address, description, False)
+                messages.success(request, message)
+                response = HttpResponseRedirect(reverse('scan_website'))
         else:
             message = form.errors
             messages.error(request, message)

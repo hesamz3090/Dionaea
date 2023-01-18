@@ -201,7 +201,7 @@
                                     <h3 class="card-title">Fast Web Site Scan</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form>
+                                    <form method="post" action="{% url 'scan_website' %}">{% csrf_token %}
                                         <div class="form-group mb-3 row">
                                             <label class="form-label col-3 col-form-label">Address</label>
                                             <div class="col">
@@ -210,7 +210,7 @@
                                             </div>
                                         </div>
                                         <div class="form-footer">
-                                            <button type="submit" class="btn btn-primary">Scan</button>
+                                            <button type="submit" name="submit" value="FAST" class="btn btn-primary">Scan</button>
                                         </div>
                                     </form>
                                 </div>

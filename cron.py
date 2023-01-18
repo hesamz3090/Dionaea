@@ -26,7 +26,12 @@ if not setting.is_active:
     setting.is_active = True
     setting.save()
 
-    tasks = Task.objects.filter(complete=False, scan__status='STARTED').order_by('id')[:setting.max_task]
+    tasks = Task.objects.filter(
+        complete=False,
+        scan__status='STARTED',
+        scan__is_fast=False
+    ).order_by('id')[:setting.max_task]
+
     for task in tasks:
         process = subprocess.Popen(
             [task.text],
