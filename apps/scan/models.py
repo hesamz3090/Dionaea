@@ -17,6 +17,7 @@ time_list = (
 
 status_list = (
     ("CREATED", "CREATED"),
+    ("READY", "READY"),
     ("STARTED", "STARTED"),
     ("STOPPED", "STOPPED"),
     ("COMPLETED", "COMPLETED"),
@@ -51,6 +52,7 @@ class Command(models.Model):
     alert = models.TextField(max_length=100)
     speed = models.CharField(choices=time_list, max_length=6)
     word = models.CharField(max_length=100)
+    spend_time = models.IntegerField(blank=True, null=True, editable=False)
     is_available = models.BooleanField(default=True)
 
     def __str__(self):
@@ -77,10 +79,9 @@ class Website(models.Model):
 
 class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    scan = models.ForeignKey(Website, on_delete=models.CASCADE)
+    website = models.ForeignKey(Website, on_delete=models.CASCADE)
     command = models.ForeignKey(Command, on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
     found = models.BooleanField(default=False)
     complete = models.BooleanField(default=False)
-    time_spend = models.FloatField(blank=True, null=True)
     result = models.TextField(blank=True)

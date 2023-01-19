@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect
 from website.forms import LoginForm, RegisterForm, ForgetForm, ContactForm, TicketForm, ProfileForm
 from apps.scan.models import *
+from django.core import serializers
 
 
 # back_url = request.META.get('HTTP_REFERER')
@@ -165,10 +166,18 @@ def login(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
+
             remember_me = form.cleaned_data.get('remember_me')
             user = authenticate(request, username=username, password=password)
+
             if user is not None:
                 auth_login(request, user)
+                profile_query = Profile.objects.get(user=user)
+                profile_dic = {
+                    'verified': profile_query.verified,
+                    'premium': profile_query.premium
+                }
+                request.session['profile'] = profile_dic
                 message = 'Welcome Back'
                 if not remember_me:
                     request.session.set_expiry(0)
@@ -200,16 +209,29 @@ def register(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')
             user_exist = User.objects.filter(username=username)
+            referral = form.cleaned_data.get('referral')
+            referral_user = User.objects.filter(username=referral)
 
-            if not user_exist:
-                user = form.save(request)
-                auth_login(request, user)
-                message = 'Wellcome To Dionaea'
-                messages.success(request, message)
-                response = HttpResponseRedirect(reverse('dashboard'))
+            if referral_user.count() >= 1 or not referral:
+                if not user_exist:
+                    user = form.save(request)
+                    auth_login(request, user)
+                    profile_query = Profile.objects.get(user=user)
+                    profile_dic = {
+                        'verified': profile_query.verified,
+                        'premium': profile_query.premium
+                    }
+                    request.session['profile'] = profile_dic
+                    message = 'Wellcome To Dionaea'
+                    messages.success(request, message)
+                    response = HttpResponseRedirect(reverse('dashboard'))
 
+                else:
+                    message = 'User Is Exist'
+                    messages.error(request, message)
+                    response = HttpResponseRedirect(reverse('register'))
             else:
-                message = 'User Is Exist'
+                message = 'Referral Not Found'
                 messages.error(request, message)
                 response = HttpResponseRedirect(reverse('register'))
 
@@ -261,6 +283,8 @@ def forget(request):
 @login_required(login_url='login')
 def logout(request):
     auth_logout(request)
+    del request.session['profile']
+    # request.session.modified = True
     message = 'You Have Successfully logged Out'
     messages.success(request, message)
     response = HttpResponseRedirect(reverse('login'))

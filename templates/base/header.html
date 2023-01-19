@@ -52,11 +52,11 @@
                     <div class="d-none d-xl-block ps-2">
                         {% if user.is_authenticated %}
                             {% if user.first_name and user.last_name %}
-                                <div {% if profile.premium %}style="color: gold" {% endif %}>{{ user.first_name }} {{ user.last_name }} </div>
+                                <div {% if request.session.profile.premium %}style="color: gold" {% endif %}>{{ user.first_name }} {{ user.last_name }} </div>
                             {% else %}
                                 <div>{{ user.email }}</div>
                             {% endif %}
-                            <div class="mt-1 small text-muted">{{ user.username }} {% if profile.premium %} <strong style="color: green">Verified</strong> {% endif %}</div>
+                            <div class="mt-1 small text-muted">{{ user.username }} {% if request.session.profile.premium %} <strong style="color: green">Verified</strong> {% endif %}</div>
 
                         {% else %}
                             <div>Account</div>

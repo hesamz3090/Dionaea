@@ -16,7 +16,7 @@ def create_website_scan(username, address, description, is_fast):
     user = User.objects.get(username=username)
     address = create_address(address)
 
-    scan = Website.objects.create(
+    website = Website.objects.create(
         user=user,
         address=create_address(address),
         description=description,
@@ -26,24 +26,52 @@ def create_website_scan(username, address, description, is_fast):
 
     if is_fast:
         commands = commands.filter(speed='FAST')
-        scan.is_fast = True
-        scan.save()
+        website.is_fast = True
+        website.save()
 
     for command in commands:
         command_row = Command.objects.get(id=command.id)
         text = command_row.args.replace("$", address)
         text = command_row.tool.text + ' ' + text
 
-        task = Task.objects.create(
+        Task.objects.create(
             user=user,
-            scan=scan,
+            website=website,
             text=text,
             command=command_row
         )
 
-        if is_fast:
+    if is_fast:
+        start_website_scan(website)
+
+    message = 'Scan Added'
+
+    return message
+
+
+def ready_website_scan(id):
+    website = Website.objects.get(id=id)
+    website.status = 'READY'
+    website.save()
+    return 'Scan Is Ready'
+
+
+def start_website_scan(id):
+    website = Website.objects.get(id=id)
+    tasks = Task.objects.filter(website=website)
+
+    for task in tasks:
+        left_task = Task.objects.filter(website=website, complete=False).count()
+        total_task = Task.objects.filter(website=website).count()
+
+        if left_task == 0:
+            task.website.percent = 100
+            task.website.status = 'COMPLETED'
+
+        else:
+            task.website.percent = 100 - ((100 * left_task) / total_task)
             process = subprocess.Popen(
-                [text],
+                [task.text],
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
@@ -51,23 +79,15 @@ def create_website_scan(username, address, description, is_fast):
             )
 
             output, err = process.communicate()
-            result = (output + err).decode("utf-8")
+            task.result = (output + err).decode("utf-8")
 
-            if task.command.word in result:
+            if task.command.word in task.result:
                 task.found = True
 
-            task.result = result
-            task.complete = True
+        task.complete = True
+        task.website.save()
+        task.save()
 
-    message = 'Scan Added'
-
-    return message
-
-
-def start_website_scan(id):
-    website = Website.objects.get(id=id)
-    website.status = 'STARTED'
-    website.save()
     return 'Scan Started'
 
 

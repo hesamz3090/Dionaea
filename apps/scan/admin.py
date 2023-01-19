@@ -17,7 +17,7 @@ class VulnerabilityAdmin(admin.ModelAdmin):
 
 @admin.register(Command)
 class CommandAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'description', 'tool', 'risk', 'speed', 'vulnerability', 'is_available')
+    list_display = ('id', 'user', 'description', 'tool', 'risk', 'speed', 'vulnerability', 'is_available', 'spend_time')
     list_filter = ('tool', 'risk', 'speed', 'vulnerability', 'is_available')
     search_fields = ('description', 'args', 'alert')
 
@@ -44,6 +44,6 @@ class WebsiteAdmin(admin.ModelAdmin):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'scan', 'text', 'complete', 'found', 'time_spend')
-    list_filter = ('found', 'user', 'scan', 'complete')
+    list_display = ('id', 'user', 'website', 'text', 'complete', 'found')
+    list_filter = ('found', 'user', 'website', 'complete')
     search_fields = ('scan', 'user', 'id')

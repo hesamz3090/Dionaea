@@ -35,7 +35,7 @@ def scan_website(request):
 
         page = int(request.GET.get('page')) if request.GET.get('page') else 1
         paginator = Paginator(query, 20)
-        query = paginator.get_page(1)
+        query = paginator.get_page(page)
 
         count_list = paginator.get_elided_page_range(number=page, on_each_side=9)
         response = render(request, 'scan/scan_website.html', {
