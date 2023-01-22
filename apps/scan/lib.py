@@ -67,6 +67,7 @@ def start_website_scan(id):
         if left_task == 0:
             task.website.percent = 100
             task.website.status = 'COMPLETED'
+            print('COMPLETED')
 
         else:
             task.website.percent = 100 - ((100 * left_task) / total_task)

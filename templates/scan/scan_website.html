@@ -125,7 +125,7 @@
                             {% for num in count_list %}
                                 <li class="page-item {% if page == num %}active{% endif %}">
                                     <a class="page-link"
-                                       href="{% if num != '…' %}http://127.0.0.1:8000/scan/scan_website?page={{ num }}{% endif %}">
+                                       href="{% if num != '…' %}{% url 'scan_website' %}?page={{ num }}{% endif %}">
                                         {{ num }}
                                     </a>
                                 </li>
