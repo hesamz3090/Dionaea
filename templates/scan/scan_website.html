@@ -55,11 +55,10 @@
             <div class="page-body">
                 <div class="container-xl">
                     <div class="row row-cards">
-
                         <div class="col-12">
                             <div class="card">
                                 <div class="table-responsive">
-                                    <table class="table table-vcenter table-mobile-md card-table">
+                                    <table class="table table-vcenter card-table table-striped">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
@@ -72,10 +71,8 @@
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
-
                                         <tbody>
-
-                                        {% for scan in website_list %}
+{% for scan in website_list %}
                                             <tr>
                                                 <td data-label="ID" class="text-muted">{{ scan.id }}</td>
                                                 <td data-label="Address">{{ scan.address }}</td>
@@ -111,16 +108,13 @@
                                                 </td>
                                             </tr>
                                         {% endfor %}
-
                                         </tbody>
-
                                     </table>
                                 </div>
-
                             </div>
-
                         </div>
-                    <ul class="pagination ">
+
+                        <ul class="pagination ">
 
                             {% for num in count_list %}
                                 <li class="page-item {% if page == num %}active{% endif %}">

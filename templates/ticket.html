@@ -53,13 +53,13 @@
 
             <div class="page-body">
                 <div class="container-xl">
-                {% include 'base/alert.html' %}
+                    {% include 'base/alert.html' %}
                     <div class="row row-cards">
 
                         <div class="col-12">
                             <div class="card">
                                 <div class="table-responsive">
-                                    <table class="table table-vcenter table-mobile-md card-table">
+                                    <table class="table table-vcenter card-table table-striped">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
@@ -71,27 +71,26 @@
                                             <th>Created</th>
                                         </tr>
                                         </thead>
-
                                         <tbody>
 
                                         {% for ticket in tickets %}
                                             <tr>
-                                                <td data-label="ID" class="text-muted">{{ ticket.id }}</td>
-                                                <td data-label="Address">{{ ticket.title }}</td>
-                                                <td data-label="Description">{{ ticket.subject.capitalize }}</td>
-                                                <td data-label="Created">{{ ticket.message }}</td>
-                                                <td data-label="Created">{{ ticket.status }}</td>
-                                                <td data-label="Percent">{{ ticket.answer }}</td>
-                                                <td data-label="Status">{{ ticket.created_on }}</td>
+                                                <td class="text-muted">{{ ticket.id }}</td>
+                                                <td>{{ ticket.title }}</td>
+                                                <td>{{ ticket.subject.capitalize }}</td>
+                                                <td>{{ ticket.message }}</td>
+                                                <td>{{ ticket.status }}</td>
+                                                <td>{{ ticket.answer }}</td>
+                                                <td>{{ ticket.created_on }}</td>
                                             </tr>
                                         {% endfor %}
 
                                         </tbody>
-
                                     </table>
                                 </div>
                             </div>
                         </div>
+
 
                     </div>
                 </div>
