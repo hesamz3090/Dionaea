@@ -29,7 +29,7 @@ class SettingAdmin(admin.ModelAdmin):
             return qs
         return qs.filter(user=request.user)
 
-    list_display = ('id', 'max_cpu_percent', 'cron')
+    list_display = ('id', 'max_cpu_percent')
 
 
 @admin.register(Document)
