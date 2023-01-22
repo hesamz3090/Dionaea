@@ -19,6 +19,7 @@ status_list = (
     ("CREATED", "CREATED"),
     ("READY", "READY"),
     ("STARTED", "STARTED"),
+    ("WORKING", "WORKING"),
     ("STOPPED", "STOPPED"),
     ("COMPLETED", "COMPLETED"),
 )

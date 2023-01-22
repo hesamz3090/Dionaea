@@ -36,7 +36,6 @@ class Profile(models.Model):
 
 
 class Setting(models.Model):
-    cron = models.BooleanField(default=False)
     max_cpu_percent = models.IntegerField(default=50)
 
 
